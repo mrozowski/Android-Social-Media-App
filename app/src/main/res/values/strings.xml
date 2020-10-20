@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Test_store</string>
+    <string name="nick">Nick</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="posts">Posts</string>
+    <string name="avatar">avatar</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="user_name">User name</string>
+    <string name="description">Description</string>
+    <string name="comments">Comments:</string>
+    <string name="likes">Likes:</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="password">Password</string>
+    <string name="save">Save</string>
+    <string name="back">Back</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="date">Date:</string>
+    <string name="title">Title</string>
+    <string name="post_template_content"> <![CDATA[Aliquam vel est accumsan, luctus mauris vitae, consequat libero. Cras bibendum risus eget velit consectetur, vel fermentum dui sollicitudin. Ut lobortis ipsum felis, ac elementum leo interdum sit amet. Vivamus tempus tincidunt mauris, non laoreet velit vulputate vel. <h3>Morbi euismod odio vitae egestas semper.</h3> Phasellus in facilisis est. <br><br> <b>Suspendisse luctus </b>augue ac sem varius feugiat. Sed euismod nibh massa. Cras tempor volutpat massa, ut eleifend est tempor sed. Proin vulputate ipsum id tellus semper scelerisque. Fusce feugiat bibendum interdum. Nunc laoreet enim vitae urna viverra, a egestas leo laoreet. ]]></string>
+    <string name="zero">0</string>
+    <string name="t">T</string>
+    <string name="post_title">Post Title</string>
+    <string name="choose_the_category">Choose the category</string>
+    <string name="category">Category</string>
+    <string name="tags">Tags</string>
+    <string name="send">Send</string>
+    <string name="save_draft">Save draft</string>
+    <string name="clear">Clear</string>
+    <string name="author">Author:</string>
+    <string-array name="category" >
+        <item>Life style</item>
+        <item>Food</item>
+        <item>Technology</item>
+        <item>Social media</item>
+        <item>News</item>
+        <item>Fashion</item>
+    </string-array>
+</resources>

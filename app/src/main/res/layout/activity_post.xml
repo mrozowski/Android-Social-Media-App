@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="18dp"
+        android:rowCount="8"
+        android:columnCount="4"
+        tools:ignore="WebViewLayout">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="55dp"
+            android:layout_row="0"
+            android:layout_rowSpan="2"
+            android:layout_column="0"
+            >
+            <ImageView
+                android:id="@+id/post_author_profile_picture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:background="@drawable/avatar_default"
+                android:contentDescription="@string/avatar" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_marginTop="28dp"
+            android:text="@string/nick"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/post_author_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="28dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/nick"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/_posts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_marginTop="8dp"
+            android:text="@string/posts"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/post_author_posts_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/posts"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/post_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_row="2"
+            android:layout_column="3"
+            android:text="@string/date" />
+
+        <TextView
+            android:id="@+id/post_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_gravity="center_vertical"
+            android:text="@string/category"/>
+
+        <TextView
+            android:id="@+id/post_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_columnSpan="4"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="22dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/title"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+
+        <TextView
+            android:id="@+id/post_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:layout_columnSpan="4"
+            android:layout_gravity="start"
+            android:layout_marginTop="22dp"
+            android:fontFamily="sans-serif"
+            android:textSize="16sp" />
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_row="5"
+            android:layout_column="3"
+            android:gravity="center"
+            android:layout_gravity="end">
+
+            <ImageView
+                android:id="@+id/giveLikeButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_heart" />
+
+            <TextView
+                android:id="@+id/post_likes_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/zero"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="6"
+            android:layout_column="0"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/comments"
+            android:textSize="18sp" />
+
+        <View android:id="@+id/separator"
+            android:background="@color/colorPrimaryDark"
+            android:layout_width = "fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="8dp"
+            android:layout_row="7"
+            android:layout_column="0"
+            android:layout_columnSpan="4"/>
+
+
+    </GridLayout>
+</ScrollView>
