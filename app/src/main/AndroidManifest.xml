@@ -23,7 +23,7 @@
         <activity android:name=".Register" />
         <activity android:name=".BottomNavigation" />
         <!--<activity android:name=".Profile.Profile" /> -->
-        <activity android:name=".ProfileEdit.EditProfileView" />
+        <!--<activity android:name=".ProfileEdit.EditProfileView" />-->
         <activity android:name=".Post.PostView" />
     </application>
 

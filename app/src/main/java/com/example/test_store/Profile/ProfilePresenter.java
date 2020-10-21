@@ -3,8 +3,10 @@ package com.example.test_store.Profile;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -87,13 +89,28 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
     }
 
     public void openEditProfileActivity() {
-        Intent myIntent = new Intent(view.getContext(), EditProfileView.class);
-        myIntent.putExtra("userID", appUser.getUserID());
-        myIntent.putExtra("nick", appUser.getNick());
-        myIntent.putExtra("email", appUser.getEmail());
-        myIntent.putExtra("phone", appUser.getPhone());
-        myIntent.putExtra("desc", appUser.getDescription());
-        view.startActivity(myIntent);
+        EditProfileView editProfileFragment = new EditProfileView();
+        Bundle bundle = new Bundle();
+        bundle.putString("userID", appUser.getUserID());
+        bundle.putString("nick", appUser.getNick());
+        bundle.putString("email", appUser.getEmail());
+        bundle.putString("phone", appUser.getPhone());
+        bundle.putString("desc", appUser.getDescription());
+        editProfileFragment.setArguments(bundle);
+
+        view.getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(((ViewGroup)view.getView().getParent()).getId(), editProfileFragment, "editProfileFragment")
+                .addToBackStack(null)
+                .commit();
+
+//        Intent myIntent = new Intent(view.getContext(), EditProfileView.class);
+//        myIntent.putExtra("userID", appUser.getUserID());
+//        myIntent.putExtra("nick", appUser.getNick());
+//        myIntent.putExtra("email", appUser.getEmail());
+//        myIntent.putExtra("phone", appUser.getPhone());
+//        myIntent.putExtra("desc", appUser.getDescription());
+//
+//        view.startActivity(myIntent);
     }
 
     @Override

@@ -7,18 +7,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.test_store.NewPost.NewPostSection;
 import com.example.test_store.Profile.Profile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BottomNavigation extends AppCompatActivity {
-
+    protected BottomNavigationView bottom_nav;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_navigation);
 
-        BottomNavigationView bottom_nav = findViewById(R.id.bottom_nav);
+        bottom_nav = findViewById(R.id.bottom_nav);
         bottom_nav.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Profile()).commit();
     }
@@ -34,14 +36,13 @@ public class BottomNavigation extends AppCompatActivity {
                             selectedFragment = new Profile();
                             break;
                         case R.id.bottom_nav_add:
-                            //
+                            selectedFragment = new NewPostSection();
                             break;
                         case R.id.bottom_nav_home:
                             //
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-
                     return true;
                 }
             };

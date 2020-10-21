@@ -32,7 +32,7 @@
     <string name="home">Home</string>
     <string name="add">Add</string>
     <string name="profile">Profile</string>
-    <string-array name="category" >
+    <string-array name="category">
         <item>Life style</item>
         <item>Food</item>
         <item>Technology</item>
@@ -40,4 +40,11 @@
         <item>News</item>
         <item>Fashion</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="new_empty_post">New empty post</string>
+    <string name="template_1">Template 1</string>
+    <string name="template_2">Template 2</string>
+    <string name="saved">Saved</string>
+    <string name="saved_1">Saved 1</string>
 </resources>

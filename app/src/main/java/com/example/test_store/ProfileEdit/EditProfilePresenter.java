@@ -53,8 +53,8 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
         FileInputStream fileInputStream = null;
         Bitmap bitmap = null;
         try {
-            File f = new File(view.getFilesDir(), "profile.png");
-            fileInputStream = view.openFileInput(USER_PROFILE_PICTURE_FILE);
+            File f = new File(view.getActivity().getFilesDir(), "profile.png");
+            fileInputStream = view.getActivity().openFileInput(USER_PROFILE_PICTURE_FILE);
             //BitmapFactory.Options bmOptions = new BitmapFactory.Options();
             bitmap = BitmapFactory.decodeStream(fileInputStream);
             fileInputStream.close();
@@ -180,7 +180,7 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
 
     private void showDialogBox() {
         VerificationDialog verificationDialog = new VerificationDialog();
-        verificationDialog.show(view.getSupportFragmentManager(), "Password Dialog");
+        verificationDialog.show(view.getActivity().getSupportFragmentManager(), "Password Dialog");
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -195,7 +195,7 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
 
     public void onBack() {
         //back to previous activity
-        view.finish();
+        view.getActivity().finish();
     }
 
     public void descChanged() {
