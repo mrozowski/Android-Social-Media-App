@@ -1,8 +1,10 @@
 package com.example.test_store.Profile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.view.MenuItem;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -13,6 +15,7 @@ import com.example.test_store.Login;
 import com.example.test_store.NewPost.write_post.WriteNewPostView;
 import com.example.test_store.Post.PostView;
 import com.example.test_store.ProfileEdit.EditProfileView;
+import com.example.test_store.R;
 import com.example.test_store.list.ItemDetails;
 import com.example.test_store.list.MyRecyclerViewAdapter;
 import com.example.test_store.list.VerticalSpaceItemDecoration;
@@ -44,6 +47,7 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
         postList = new ArrayList<>();
         database = new Database();
         database.setListener(this);
+        connectUser();
         loadProfileImage();
     }
 
@@ -60,10 +64,10 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
     }
 
     private void showPostList(){
-        view.recyclerView.setLayoutManager(new LinearLayoutManager(view));
+        view.recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         view.recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(20));
 
-        view.adapter = new MyRecyclerViewAdapter(view, postList);
+        view.adapter = new MyRecyclerViewAdapter(view.getContext(), postList);
         view.adapter.setClickListener(view);
         view.recyclerView.setAdapter(view.adapter);
         view.recyclerView.setNestedScrollingEnabled(false);
@@ -77,13 +81,13 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
     }
 
     public void openPostActivity(String postID){
-        Intent myIntent = new Intent(view.getApplicationContext(), PostView.class);
+        Intent myIntent = new Intent(view.getContext(), PostView.class);
         myIntent.putExtra("postID", postID);
         view.startActivity(myIntent);
     }
 
     public void openEditProfileActivity() {
-        Intent myIntent = new Intent(view.getApplicationContext(), EditProfileView.class);
+        Intent myIntent = new Intent(view.getContext(), EditProfileView.class);
         myIntent.putExtra("userID", appUser.getUserID());
         myIntent.putExtra("nick", appUser.getNick());
         myIntent.putExtra("email", appUser.getEmail());
@@ -95,8 +99,8 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
     @Override
     public void logout() {
         FirebaseAuth.getInstance().signOut();
-        view.startActivity(new Intent(view.getApplicationContext(), Login.class));
-        view.finish();
+        view.startActivity(new Intent(view.getContext(), Login.class));
+        view.getActivity().finish();
     }
 
     @Override
@@ -152,7 +156,7 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
         //BitmapDrawable profileDrawable = (BitmapDrawable) view.profileImage.getBackground();
 
         try{
-            File f = new File(view.getFilesDir(), "profile.png");
+            File f = new File(view.getActivity().getFilesDir(), "profile.png");
             userFile = new FileOutputStream(f);
             pic.compress(Bitmap.CompressFormat.PNG, 100, userFile);
 
@@ -166,7 +170,7 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
         //saving user data to internal storage. To not ask database too often for this same data
         FileOutputStream userFile = null;
         try{
-            userFile = view.openFileOutput(USER_DATA_FILE, MODE_PRIVATE);
+            userFile = view.getActivity().openFileOutput(USER_DATA_FILE, MODE_PRIVATE);
             ObjectOutputStream objectOut = new ObjectOutputStream(userFile);
             objectOut.writeObject(appUser);
             objectOut.close();
@@ -177,6 +181,21 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
     }
 
     public void openSettingsActivity() {
-        view.startActivity(new Intent(view.getApplicationContext(), WriteNewPostView.class));
+        view.startActivity(new Intent(view.getContext(), WriteNewPostView.class));
+    }
+
+    public boolean onSettingsClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_edit_profile:
+                openEditProfileActivity();
+                return true;
+            case R.id.menu_settings:
+                openSettingsActivity();
+                return true;
+            case R.id.menu_logout:
+                logout();
+            default:
+                return false;
+        }
     }
 }

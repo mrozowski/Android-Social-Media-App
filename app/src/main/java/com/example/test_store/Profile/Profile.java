@@ -1,14 +1,19 @@
 package com.example.test_store.Profile;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -24,7 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class Profile extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
+public class Profile extends Fragment implements MyRecyclerViewAdapter.ItemClickListener {
 
     TextView nick, likes, followers, posts, description;
     ImageButton settings;
@@ -33,54 +38,21 @@ public class Profile extends AppCompatActivity implements MyRecyclerViewAdapter.
     RecyclerView recyclerView;
     private ProfilePresenter presenter;
 
-    @SuppressLint("RestrictedApi")
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-
-        nick = findViewById(R.id.user_name);
-        likes = findViewById(R.id.likes);
-        posts = findViewById(R.id.posts_count);
-        followers = findViewById(R.id.followers);
-        description = findViewById(R.id.user_description);
-        settings = findViewById(R.id.settings_button);
-        profileImage = findViewById(R.id.user_avatar);
-
-        recyclerView = findViewById(R.id.recyclerView);
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_profile, container, false);
+        initComponents(view);
         presenter = new ProfilePresenter(this);
 
-        //temporary data - finally data will be taken from the database
-        //ArrayList<ItemDetails> content = getSomeData();
-
-        //presenter.loadProfileImage();
-        presenter.connectUser();
-
-        //presenter.loadUserPostList();
-
-        //settings
-
         settings.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(final View v) {
                 PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()){
-                            case R.id.menu_edit_profile:
-                                presenter.openEditProfileActivity();
-                                return true;
-                            case R.id.menu_settings:
-                                presenter.openSettingsActivity();
-                                return true;
-                            case R.id.menu_logout:
-                                presenter.logout();
-                            default:
-                                return false;
-                        }
+                        return presenter.onSettingsClick(item);
                     }
                 });
                 popupMenu.inflate(R.menu.settings_menu);
@@ -88,13 +60,78 @@ public class Profile extends AppCompatActivity implements MyRecyclerViewAdapter.
             }
         });
 
+        return view;
     }
 
-    public void logout(View view){
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getApplicationContext(), Login.class));
-        finish();
+    //    @SuppressLint("RestrictedApi")
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_profile);
+//
+//        nick = findViewById(R.id.user_name);
+//        likes = findViewById(R.id.likes);
+//        posts = findViewById(R.id.posts_count);
+//        followers = findViewById(R.id.followers);
+//        description = findViewById(R.id.user_description);
+//        settings = findViewById(R.id.settings_button);
+//        profileImage = findViewById(R.id.user_avatar);
+//
+//        recyclerView = findViewById(R.id.recyclerView);
+//
+//        presenter = new ProfilePresenter(this);
+//
+//        //temporary data - finally data will be taken from the database
+//        //ArrayList<ItemDetails> content = getSomeData();
+//
+//        //presenter.loadProfileImage();
+//        presenter.connectUser();
+//
+//        //presenter.loadUserPostList();
+//
+//        //settings
+//
+//        settings.setOnClickListener(new View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(final View v) {
+//                PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
+//                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    @Override
+//                    public boolean onMenuItemClick(MenuItem item) {
+//                        switch (item.getItemId()){
+//                            case R.id.menu_edit_profile:
+//                                presenter.openEditProfileActivity();
+//                                return true;
+//                            case R.id.menu_settings:
+//                                presenter.openSettingsActivity();
+//                                return true;
+//                            case R.id.menu_logout:
+//                                presenter.logout();
+//                            default:
+//                                return false;
+//                        }
+//                    }
+//                });
+//                popupMenu.inflate(R.menu.settings_menu);
+//                popupMenu.show();
+//            }
+//        });
+//
+//    }
+
+    private void initComponents(View view){
+        nick = view.findViewById(R.id.user_name);
+        likes = view.findViewById(R.id.likes);
+        posts = view.findViewById(R.id.posts_count);
+        followers = view.findViewById(R.id.followers);
+        description = view.findViewById(R.id.user_description);
+        settings = view.findViewById(R.id.settings_button);
+        profileImage = view.findViewById(R.id.user_avatar);
+
+        recyclerView = view.findViewById(R.id.recyclerView);
     }
+
 
 
     public ArrayList<ItemDetails> getSomeData(){
@@ -116,7 +153,7 @@ public class Profile extends AppCompatActivity implements MyRecyclerViewAdapter.
     }
 
     public void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 }
 
