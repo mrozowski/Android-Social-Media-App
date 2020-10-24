@@ -16,6 +16,8 @@ import com.example.test_store.Logowanie.Login;
 import com.example.test_store.Post.PostModel;
 import com.example.test_store.NewPost.NewPostModel;
 import com.example.test_store.Profile.AppUser;
+import com.example.test_store.Register.Register;
+import com.example.test_store.Register.RegisterModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,7 +46,9 @@ import com.squareup.picasso.Picasso;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 import static com.example.test_store.Constants.PROFILE_IMG_NAME;
@@ -284,7 +288,38 @@ public class Database implements DTO{
                         }
                     }
                 });
-        //if login failed check what was the readon (wrong pass, email etc)
+    }
+
+    @Override
+    public void register(final RegisterModel newUser, String password) {
+        auth = FirebaseAuth.getInstance();
+        auth.createUserWithEmailAndPassword(newUser.getEmail(), password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            String userID = auth.getCurrentUser().getUid(); //take current user ID
+                            connectToUserFireStoreDatabase(userID); //add new user to the firestore database
+                            userFileRef.set(newUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    listener.onDataResultListener("Account created");
+                                    listener.onRegisterListener(true);
+                                }
+                            });
+                        }
+                        else{
+                            listener.onDataResultListener("Something went wrong");
+                            listener.onRegisterListener(false);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                listener.onDataResultListener("Something went wrong");
+                listener.onRegisterListener(false);
+            }
+        });
     }
 
     protected void getPostData(final String postID){
@@ -363,22 +398,8 @@ public class Database implements DTO{
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot document = task.getResult();
                 if(document != null){
-                    int like_count = 0, follower_count = 0, post_count = 0;
-                    String user_nick  = document.getString("Nick");
-                    String user_email = document.getString("Email");
-                    String user_phone = document.getString("Phone");
-                    String user_desc  = document.getString("Description");
-
-                    try {
-                        like_count = (document.getLong("Likes")).intValue();
-                        follower_count = (document.getLong("Followers")).intValue();
-                        post_count = (document.getLong("Posts")).intValue();
-
-                    }catch (NullPointerException e){
-                        Log.d("MyTAG", "Error: " + e.getMessage());
-                    }
-
-                    AppUser appUser = new AppUser(user.getUid(), user_nick, user_email, user_phone, user_desc, follower_count, like_count, post_count);
+                    AppUser appUser = document.toObject(AppUser.class);
+                    appUser.setUserID(document.getId());
                     listener.onReceiveUserDataListener(appUser);
                 }
 

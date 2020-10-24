@@ -1,13 +1,17 @@
 package com.example.test_store.NewPost.add_details;
 
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.test_store.BottomNavigation;
 import com.example.test_store.Database.Database;
 import com.example.test_store.Database.ResultDataListenerAdapter;
+import com.example.test_store.Home.HomeView;
 import com.example.test_store.R;
 import com.example.test_store.NewPost.NewPostModel;
 import com.example.test_store.Profile.AppUser;
@@ -36,7 +40,8 @@ public class AddPostDetailsPresenter implements AdapterView.OnItemSelectedListen
         view.choose_cat.setAdapter(adapter);
 
         view.choose_cat.setOnItemSelectedListener(this);
-        view.choose_cat.setPopupBackgroundResource(R.drawable.main_motive);
+        view.choose_cat.setSelection(1);
+        //view.choose_cat.setPopupBackgroundResource(R.drawable.main_motive);
     }
 
 
@@ -46,6 +51,7 @@ public class AddPostDetailsPresenter implements AdapterView.OnItemSelectedListen
         ((TextView) view).setGravity(Gravity.CENTER);
        // changeCategory(parent.getItemAtPosition(position).toString());
     }
+
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
@@ -59,12 +65,18 @@ public class AddPostDetailsPresenter implements AdapterView.OnItemSelectedListen
                 @Override
                 public void onDataResultListener(String result) {
                     view.showToast(result);
+                    openHomeFragment();
                 }
             };
             database.setListener(dataAdapter);
             NewPostModel newPost = createPost();
             database.uploadNewPost(newPost);
         }
+    }
+
+    private void openHomeFragment() {
+       view.startActivity(new Intent(view.getApplicationContext(), BottomNavigation.class));
+       view.finish();
     }
 
     private boolean validatePost() {
@@ -134,5 +146,9 @@ public class AddPostDetailsPresenter implements AdapterView.OnItemSelectedListen
         }
 
         return id;
+    }
+
+    public void onBackClicked() {
+        view.finish();
     }
 }

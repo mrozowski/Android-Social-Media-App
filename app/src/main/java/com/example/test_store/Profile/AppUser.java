@@ -3,15 +3,18 @@ package com.example.test_store.Profile;
 import java.io.Serializable;
 
 public class AppUser implements Serializable {
-    private final String userID;
-    private final String nick;
-    private final String email;
-    private final String phone;
-    private final String description;
-    private final int followers;
-    private final int likes;
-    private final int posts;
+    private String userID;
+    private String nick;
+    private String email;
+    private String phone;
+    private String description;
+    private int followers;
+    private int likes;
+    private int posts;
 
+    public AppUser(){
+        //empty constructor for loading data from firebase
+    }
 
     public AppUser(String userID, String nick, String email, String phone, String description, int followers, int likes, int posts) {
         this.userID = userID;
@@ -24,6 +27,9 @@ public class AppUser implements Serializable {
         this.posts = posts;
     }
 
+    public void setUserID(String userID){
+        this.userID = userID;
+    }
     public String getUserID() {
         return userID;
     }

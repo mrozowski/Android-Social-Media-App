@@ -88,7 +88,7 @@ public class WriteNewPostPresenter implements EditorControlBar.EditorControlList
     }
 
     public void goBack() {
-        view.showToast("go back");
+        view.finish();
     }
 
     public void goNext() {

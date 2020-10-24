@@ -30,89 +30,29 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Register extends AppCompatActivity {
+    private RegisterPresenter presenter;
     EditText mNick, mEmail, mPassword, mPhone;
     Button mRegister;
     TextView mLoginButton;
-    String userID;
     ProgressBar progressBar;
-    FirebaseAuth mFirebaseAuth;
-    FirebaseFirestore mFireStore;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        initComponents();
+        presenter = new RegisterPresenter(this);
+        setButtons();
+    }
 
-        mNick = findViewById(R.id.name_field);
-        mEmail = findViewById(R.id.email_field);
-        mPassword = findViewById(R.id.pass_field);
-        mPhone = findViewById(R.id.phone_field);
-        mRegister = findViewById(R.id.register_button);
-        mLoginButton = findViewById(R.id.have_account_button);
-        progressBar = findViewById(R.id.progressBar2);
-
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFireStore = FirebaseFirestore.getInstance();
-
-
-
+    private void setButtons() {
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String nick = mNick.getText().toString().trim();
-                final String email = mEmail.getText().toString().trim();
-                final String password = mPassword.getText().toString().trim();
-                final String phone = mPhone.getText().toString().trim();
-
-                if(TextUtils.isEmpty(email)){
-                    mEmail.setError("Email is required");
-                    return;
-                }
-                if(TextUtils.isEmpty(password)){
-                    mPassword.setError("Password is required");
-                    return;
-                }
-                //Minimum eight characters, at least one letter and one number:
-                if(!password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")){
-                    mPassword.setError("Password must have minimum 8 characters,\ncontains at least one letter and one number");
-                    return;
-                }
-
-                progressBar.setVisibility(View.VISIBLE);
-                // If everything is good then register new user
-                mFirebaseAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(Register.this, "Account created", Toast.LENGTH_SHORT).show();
-                                    userID = mFirebaseAuth.getCurrentUser().getUid(); //take current user ID
-
-                                    DocumentReference documentReference = mFireStore.collection("users").document(userID);  //add new user to the firestore database
-                                    Map<String,Object> user = new HashMap<>();  //user attributes
-                                    user.put("Nick", nick);
-                                    user.put("Email", email);
-                                    user.put("Phone", phone);
-                                    user.put("Posts", 0);
-                                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Log.d("MyTAG","User "+userID+" was successfully added to the database");
-                                        }
-                                    });
-
-                                    startActivity(new Intent(getApplicationContext(), BottomNavigation.class));
-                                }
-                                else{
-                                    progressBar.setVisibility(View.GONE);
-                                    String error = Objects.requireNonNull(task.getException()).getMessage();
-                                    Toast.makeText(Register.this, "Something went wrong " + error, Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                presenter.onRegisterClicked();
             }
         });
-
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,5 +60,19 @@ public class Register extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void initComponents() {
+        mNick = findViewById(R.id.name_field);
+        mEmail = findViewById(R.id.email_field);
+        mPassword = findViewById(R.id.pass_field);
+        mPhone = findViewById(R.id.phone_field);
+        mRegister = findViewById(R.id.register_button);
+        mLoginButton = findViewById(R.id.have_account_button);
+        progressBar = findViewById(R.id.progressBar2);
+    }
+
+    public void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

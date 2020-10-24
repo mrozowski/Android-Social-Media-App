@@ -25,14 +25,7 @@ public class AddPostDetailsView extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post_details);
 
-        content = getIntent().getStringExtra("content");
-        title = findViewById(R.id.new_post_title);
-        tags = findViewById(R.id.new_post_tags);
-        category = findViewById(R.id.new_post_user_category);
-        choose_cat = findViewById(R.id.new_post_category_button);
-        back = findViewById(R.id.new_post_details_back);
-        submit = findViewById(R.id.new_post_details_send);
-
+        initComponents();
         presenter = new AddPostDetailsPresenter(this);
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +34,23 @@ public class AddPostDetailsView extends AppCompatActivity{
                 presenter.submitPost();
             }
         });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onBackClicked();
+            }
+        });
 
+    }
+
+    private void initComponents() {
+        content = getIntent().getStringExtra("content");
+        title = findViewById(R.id.new_post_title);
+        tags = findViewById(R.id.new_post_tags);
+        category = findViewById(R.id.new_post_user_category);
+        choose_cat = findViewById(R.id.new_post_category_button);
+        back = findViewById(R.id.new_post_details_back);
+        submit = findViewById(R.id.new_post_details_send);
     }
 
     public void showToast(String message){

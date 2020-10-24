@@ -36,4 +36,9 @@ public abstract class ResultDataListenerAdapter implements ResultDataListener{
     public void onLoginListener(boolean isSuccess) {
 
     }
+
+    @Override
+    public void onRegisterListener(boolean isSuccess) {
+
+    }
 }

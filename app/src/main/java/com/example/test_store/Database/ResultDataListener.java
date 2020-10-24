@@ -17,4 +17,6 @@ public interface ResultDataListener {
     void onReceiveUserDataListener(AppUser appUser);
     void onReceivePostDataListener(PostModel post);
     void onLoginListener(boolean isSuccess);
+
+    void onRegisterListener(boolean isSuccess);
 }

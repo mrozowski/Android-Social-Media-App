@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import com.example.test_store.NewPost.NewPostModel;
+import com.example.test_store.Register.RegisterModel;
 
 public interface DTO {
    void changeDescription(String newDescription);
@@ -31,4 +32,5 @@ public interface DTO {
 
    boolean isLoggedIn();
    void login(String email, String password);
+   void register(RegisterModel newUser, String password);
 }

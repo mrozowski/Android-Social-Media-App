@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="12dp"
-                android:background="@color/colorPrimaryBlue"
+                android:background="@drawable/card_new_post_template"
 
                 android:text="@string/back"
                 android:textSize="22sp" />
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="12dp"
-                android:background="@color/colorPrimaryBlue"
+                android:background="@drawable/card_new_post_template"
 
                 android:text="@string/send"
                 android:textSize="22sp" />
