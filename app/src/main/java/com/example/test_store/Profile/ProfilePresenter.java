@@ -1,6 +1,5 @@
 package com.example.test_store.Profile;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -13,8 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.test_store.Constants;
 import com.example.test_store.Database.Database;
 import com.example.test_store.Database.ResultDataListenerAdapter;
-import com.example.test_store.Login;
-import com.example.test_store.NewPost.write_post.WriteNewPostView;
+import com.example.test_store.Logowanie.Login;
 import com.example.test_store.Post.PostView;
 import com.example.test_store.ProfileEdit.EditProfileView;
 import com.example.test_store.R;
@@ -102,15 +100,6 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
                 .replace(((ViewGroup)view.getView().getParent()).getId(), editProfileFragment, "editProfileFragment")
                 .addToBackStack(null)
                 .commit();
-
-//        Intent myIntent = new Intent(view.getContext(), EditProfileView.class);
-//        myIntent.putExtra("userID", appUser.getUserID());
-//        myIntent.putExtra("nick", appUser.getNick());
-//        myIntent.putExtra("email", appUser.getEmail());
-//        myIntent.putExtra("phone", appUser.getPhone());
-//        myIntent.putExtra("desc", appUser.getDescription());
-//
-//        view.startActivity(myIntent);
     }
 
     @Override
@@ -198,7 +187,7 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
     }
 
     public void openSettingsActivity() {
-        view.startActivity(new Intent(view.getContext(), WriteNewPostView.class));
+        //view.startActivity(new Intent(view.getContext(), WriteNewPostView.class));
     }
 
     public boolean onSettingsClick(MenuItem item) {

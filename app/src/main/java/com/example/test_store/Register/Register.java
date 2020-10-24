@@ -1,4 +1,4 @@
-package com.example.test_store;
+package com.example.test_store.Register;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +14,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.test_store.Profile.Profile;
+import com.example.test_store.BottomNavigation;
+import com.example.test_store.Logowanie.Login;
+import com.example.test_store.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -99,7 +101,7 @@ public class Register extends AppCompatActivity {
                                         }
                                     });
 
-                                    startActivity(new Intent(getApplicationContext(), Profile.class));
+                                    startActivity(new Intent(getApplicationContext(), BottomNavigation.class));
                                 }
                                 else{
                                     progressBar.setVisibility(View.GONE);

@@ -13,7 +13,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 public interface ResultDataListener {
     void onDataResultListener(String result);
     //void onReceivePictureListener(Bitmap pic);
-    void onReceiveUserPostListListener(Task<QuerySnapshot> postList);
+    void onReceiveUserPostListListener(Task<QuerySnapshot> task);
     void onReceiveUserDataListener(AppUser appUser);
     void onReceivePostDataListener(PostModel post);
+    void onLoginListener(boolean isSuccess);
 }

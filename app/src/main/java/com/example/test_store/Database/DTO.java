@@ -20,11 +20,15 @@ public interface DTO {
    void getUserDataByID(String userID);
 
    void getPostDataByID(String postID);
+   void getUserPostList(String userID);
+   void getAllPost();
+
    void uploadNewPost(NewPostModel post);
 
    void giveLike(String postID, String userID);
    void followUser(String userID);
 
 
-
+   boolean isLoggedIn();
+   void login(String email, String password);
 }

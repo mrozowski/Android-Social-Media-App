@@ -31,4 +31,9 @@ public abstract class ResultDataListenerAdapter implements ResultDataListener{
     public void onReceiveUserPostListListener(Task<QuerySnapshot> postList) {
 
     }
+
+    @Override
+    public void onLoginListener(boolean isSuccess) {
+
+    }
 }

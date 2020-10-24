@@ -1,13 +1,18 @@
 package com.example.test_store.Database;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.test_store.BottomNavigation;
 import com.example.test_store.Constants;
+import com.example.test_store.Logowanie.Login;
 import com.example.test_store.Post.PostModel;
 import com.example.test_store.NewPost.NewPostModel;
 import com.example.test_store.Profile.AppUser;
@@ -17,6 +22,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException;
@@ -46,6 +52,7 @@ import static com.example.test_store.Constants.getProfileDirectory;
 
 
 public class Database implements DTO{
+    private FirebaseAuth auth;
     private FirebaseFirestore firebaseStore;
     private DocumentReference userFileRef;  //Refers to Firebase Cloud FireStore - users collection
     private DocumentReference postFileRef;  //Refers to Firebase Cloud FireStore - posts collection
@@ -209,6 +216,41 @@ public class Database implements DTO{
         receiver.getPostData(postID);
     }
 
+    public void getUserPostList(String userID) {
+        CollectionReference posts = firebaseStore.collection("posts");
+
+        posts.whereEqualTo("authorID", userID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful() && task.getResult() != null){
+                            listener.onReceiveUserPostListListener(task);
+                        }
+                        else{
+                            Log.d(Constants.TAG, "Failed");
+                        }
+                    }
+                });
+
+    }
+
+    @Override
+    public void getAllPost() {
+        CollectionReference posts = firebaseStore.collection("posts");
+        posts.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful() && task.getResult() != null){
+                    listener.onReceiveUserPostListListener(task);
+                }
+                else{
+                    Log.d(Constants.TAG, "Failed");
+                }
+            }
+        });
+    }
+
     @Override
     public void uploadNewPost(NewPostModel post) {
         connectToUserFireStoreDatabase(user.getUid());
@@ -220,6 +262,29 @@ public class Database implements DTO{
                         listener.onDataResultListener("Post uploaded");
                     }
                 });
+    }
+
+    @Override
+    public boolean isLoggedIn() {
+        return user != null;
+    }
+
+    @Override
+    public void login(String email, String password) {
+        auth = FirebaseAuth.getInstance();
+        auth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+                            listener.onLoginListener(true);
+                        }else{
+                            listener.onLoginListener(false);
+                            listener.onDataResultListener(task.getException().getMessage());
+                        }
+                    }
+                });
+        //if login failed check what was the readon (wrong pass, email etc)
     }
 
     protected void getPostData(final String postID){
@@ -353,26 +418,6 @@ public class Database implements DTO{
         this.listener = listener;
     }
 
-    public void getUserPostList(String userID) {
-        CollectionReference posts = firebaseStore.collection("posts");
 
-        posts.whereEqualTo("authorID", userID)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful() && task.getResult() != null){
-                            listener.onReceiveUserPostListListener(task);
-                            for(QueryDocumentSnapshot doc : task.getResult()){
-                                Log.d(Constants.TAG, doc.getId() + " => " + doc.getData());
-                            }
-                        }
-                        else{
-                            Log.d(Constants.TAG, "Failed");
-                        }
-                    }
-                });
-
-    }
 }
 

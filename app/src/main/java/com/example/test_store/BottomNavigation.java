@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.test_store.Home.HomeView;
 import com.example.test_store.NewPost.NewPostSection;
 import com.example.test_store.Profile.Profile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -39,7 +40,7 @@ public class BottomNavigation extends AppCompatActivity {
                             selectedFragment = new NewPostSection();
                             break;
                         case R.id.bottom_nav_home:
-                            //
+                            selectedFragment = new HomeView();
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
