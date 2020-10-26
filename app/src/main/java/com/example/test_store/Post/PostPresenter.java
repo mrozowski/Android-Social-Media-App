@@ -16,10 +16,10 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class PostPresenter extends ResultDataListenerAdapter implements PostContract.Presenter {
+    private boolean liked = false;
     private PostView view;
     private Database database;
     private PostModel post;
-
 
     public PostPresenter(PostView postView) {
         view = postView;
@@ -64,9 +64,12 @@ public class PostPresenter extends ResultDataListenerAdapter implements PostCont
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void giveLike() {
-        database.giveLike(post.getPostID(), post.getAuthorID());
-        post.addLike();
-        view.postLikes.setText(String.valueOf(post.getLikes()));
-        view.postLikes.setTextColor(view.getColor(R.color.colorPrimaryPurple));
+        if(!liked){
+            database.giveLike(post.getPostID(), post.getAuthorID());
+            post.addLike();
+            view.postLikes.setText(String.valueOf(post.getLikes()));
+            view.postLikes.setTextColor(view.getActivity().getColor(R.color.colorPrimaryPurple));
+            liked = true;
+        }
     }
 }

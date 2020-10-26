@@ -1,8 +1,10 @@
 package com.example.test_store.Home;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -48,9 +50,15 @@ public class HomePresenter extends ResultDataListenerAdapter implements MyRecycl
 
 
     public void openPostActivity(String postID){
-        Intent myIntent = new Intent(view.getContext(), PostView.class);
-        myIntent.putExtra("postID", postID);
-        view.startActivity(myIntent);
+        PostView postFragment = new PostView();
+        Bundle bundle = new Bundle();
+        bundle.putString("postID", postID);
+        postFragment.setArguments(bundle);
+
+        view.getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(((ViewGroup)view.getView().getParent()).getId(), postFragment, "postFragment")
+                .addToBackStack(view.getClass().getName())
+                .commit();
     }
 
     @Override

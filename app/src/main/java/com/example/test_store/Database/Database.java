@@ -92,12 +92,10 @@ public class Database implements DTO{
 
     @Override
     public void giveLike(String postID, String userID) {
-        //updateUserDataByID("Likes",)
-        //connectToUserFireStoreDatabase(userID);  add user later
         connectToPostFireStoreDatabase(postID);
         connectToUserFireStoreDatabase(userID);
         incrementData(postFileRef, "likes"); // add like to post
-        incrementData(userFileRef, "Likes"); // add like to user
+        incrementData(userFileRef, "likes"); // add like to user
     }
 
     @Override
