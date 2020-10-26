@@ -44,6 +44,12 @@ public class PostView extends Fragment {
                 presenter.giveLike();
             }
         });
+        authorPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.openAuthorProfile();
+            }
+        });
         return view;
     }
 
@@ -67,6 +73,7 @@ public class PostView extends Fragment {
         postLikes = view.findViewById(R.id.post_likes_count);
         postDate = view.findViewById(R.id.post_date);
         likeButton = view.findViewById(R.id.giveLikeButton);
+
     }
 
     public void showToast(String message) {

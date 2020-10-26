@@ -2,6 +2,8 @@ package com.example.test_store.Post;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
+import android.os.Bundle;
+import android.view.ViewGroup;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.text.HtmlCompat;
@@ -9,6 +11,8 @@ import androidx.core.text.HtmlCompat;
 import com.example.test_store.Constants;
 import com.example.test_store.Database.ResultDataListenerAdapter;
 import com.example.test_store.Database.Database;
+import com.example.test_store.OtherUserProfile.OtherUserProfileView;
+import com.example.test_store.ProfileEdit.EditProfileView;
 import com.example.test_store.R;
 
 import java.text.DateFormat;
@@ -71,5 +75,18 @@ public class PostPresenter extends ResultDataListenerAdapter implements PostCont
             view.postLikes.setTextColor(view.getActivity().getColor(R.color.colorPrimaryPurple));
             liked = true;
         }
+    }
+
+    public void openAuthorProfile() {
+        OtherUserProfileView authorProfile = new OtherUserProfileView();
+        Bundle bundle = new Bundle();
+        bundle.putString("userID", post.getAuthorID());
+
+        authorProfile.setArguments(bundle);
+
+        view.getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(((ViewGroup)view.getView().getParent()).getId(), authorProfile, "authorProfile")
+                .addToBackStack(view.getClass().getName())
+                .commit();
     }
 }
