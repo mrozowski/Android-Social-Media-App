@@ -98,7 +98,7 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
 
         view.getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(((ViewGroup)view.getView().getParent()).getId(), editProfileFragment, "editProfileFragment")
-                .addToBackStack(null)
+                .addToBackStack(view.getClass().getName())
                 .commit();
     }
 
@@ -140,12 +140,12 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
                 //Log.d(Constants.TAG, doc.getId() + " => " + doc.getData());
                 postList.add(new ItemDetails(doc.getString("title"),
                         "author",
+                        doc.getString("category"),
                         doc.getLong("commentsCount").intValue(),
                         doc.getLong("likes").intValue(),
                         Constants.getDefaultDateFormat(doc.getDate("postDate")),
                         doc.getId()));
             }
-
             showPostList();
         }
         else{

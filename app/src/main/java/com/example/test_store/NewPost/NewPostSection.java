@@ -5,14 +5,19 @@ import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.example.test_store.Constants;
 import com.example.test_store.R;
 
 import java.util.zip.Inflater;
+
+
 
 public class NewPostSection extends Fragment {
 
@@ -31,8 +36,8 @@ public class NewPostSection extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_new_post_section, container, false);
         initComponents(view);
-        setButtons();
         presenter = new NewPostSectionPresenter(this);
+        setButtons();
         return view;
     }
 
@@ -40,6 +45,14 @@ public class NewPostSection extends Fragment {
         newPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                presenter.openWriteNewPostActivity();
+            }
+        });
+
+        saved1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.loadSavedDraft();
                 presenter.openWriteNewPostActivity();
             }
         });

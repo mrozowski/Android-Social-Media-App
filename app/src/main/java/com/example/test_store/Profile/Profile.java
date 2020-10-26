@@ -69,18 +69,6 @@ public class Profile extends Fragment implements MyRecyclerViewAdapter.ItemClick
     }
 
 
-
-    public ArrayList<ItemDetails> getSomeData(){
-        //delete later
-        ArrayList<ItemDetails> animalNames = new ArrayList<>();
-        animalNames.add(new ItemDetails("Lorem ipsum caxani", "author", 4, 2, "08.10.2020", "WIOEJJqgFLkCuU9mK0lq"));
-        animalNames.add(new ItemDetails("Aliqua id fugiat nostrud irure ex", "author", 5, 21, "05.10.2020", "2"));
-        animalNames.add(new ItemDetails("Fugiat nostrud irure ex ipsum", "author", 1, 2, "01.10.2020", "3"));
-        animalNames.add(new ItemDetails("Lorem nostrud ipsum", "author", 5, 11, "28.09.2020", "4"));
-        animalNames.add(new ItemDetails("Nistrup ipsum", "author", 0, 13, "08.09.2020", "5"));
-        return animalNames;
-    }
-
     @Override
     public void onItemClick(View view, int position) {
         //Toast.makeText(this,"Clicked " + adapter.getItemId(position), Toast.LENGTH_SHORT).show();

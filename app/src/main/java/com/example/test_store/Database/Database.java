@@ -266,6 +266,8 @@ public class Database implements DTO{
                         listener.onDataResultListener("Post uploaded");
                     }
                 });
+        //increment number of posts in user table
+        incrementData(userFileRef, "posts");
     }
 
     @Override
@@ -351,23 +353,11 @@ public class Database implements DTO{
             @Override
             public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
                 DocumentSnapshot snapshot = transaction.get(docRef);
-                long newLikes = snapshot.getLong(field) + 1;
-                transaction.update(docRef, field, newLikes);
+                long incremented = snapshot.getLong(field) + 1;
+                transaction.update(docRef, field, incremented);
 
                 //Success
                 return null;
-            }
-        }).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-               // Log.d("MyTAG", "Giving a '"+field+"' operation succeed");
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("MyTAG", field + " error: " + e.getMessage());
-                //maybe show toast - operation didn't work
             }
         });
     }

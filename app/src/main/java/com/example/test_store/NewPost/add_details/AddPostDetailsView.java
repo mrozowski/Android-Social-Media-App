@@ -16,7 +16,6 @@ public class AddPostDetailsView extends AppCompatActivity{
     protected String content;
     private AddPostDetailsPresenter presenter;
     EditText title, tags;
-    TextView category;
     Button back, submit;
     Spinner choose_cat;
 
@@ -47,7 +46,6 @@ public class AddPostDetailsView extends AppCompatActivity{
         content = getIntent().getStringExtra("content");
         title = findViewById(R.id.new_post_title);
         tags = findViewById(R.id.new_post_tags);
-        category = findViewById(R.id.new_post_user_category);
         choose_cat = findViewById(R.id.new_post_category_button);
         back = findViewById(R.id.new_post_details_back);
         submit = findViewById(R.id.new_post_details_send);

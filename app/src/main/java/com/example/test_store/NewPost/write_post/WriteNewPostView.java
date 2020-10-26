@@ -28,20 +28,29 @@ public class WriteNewPostView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_post);
-
+        initComponents();
+        presenter = new WriteNewPostPresenter(this);
+        setButtons();
+        getExtras();
 //        markDEditor = findViewById(R.id.mdEditor);
 //        editorControlBar = findViewById(R.id.controlBar);
-        postContent = findViewById(R.id.new_post_edit_text);
-        goBack = findViewById(R.id.new_post_go_back);
-        next = findViewById(R.id.new_post_next);
-        more = findViewById(R.id.new_post_more);
+//
+//
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//
+//
+//        presenter.setTextEditor();
 
-        //setSupportActionBar(toolbar);
-       // getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
 
-        presenter = new WriteNewPostPresenter(this);
-        //presenter.setTextEditor();
+    private void getExtras() {
+        if(getIntent().getExtras() != null){
+            postContent.setText(getIntent().getStringExtra("loadPost"));
+        }
+    }
 
+    private void setButtons() {
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +71,13 @@ public class WriteNewPostView extends AppCompatActivity {
                 presenter.showMoreOptions(v);
             }
         });
+    }
+
+    private void initComponents() {
+        postContent = findViewById(R.id.new_post_edit_text);
+        goBack = findViewById(R.id.new_post_go_back);
+        next = findViewById(R.id.new_post_next);
+        more = findViewById(R.id.new_post_more);
     }
 
     @Override

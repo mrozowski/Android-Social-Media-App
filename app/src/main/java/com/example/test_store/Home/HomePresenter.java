@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test_store.Constants;
 import com.example.test_store.Database.Database;
@@ -64,9 +63,9 @@ public class HomePresenter extends ResultDataListenerAdapter implements MyRecycl
     public void onReceiveUserPostListListener(Task<QuerySnapshot> task) {
         if(task.getResult() != null){
             for(QueryDocumentSnapshot doc : task.getResult()){
-                //Log.d(Constants.TAG, doc.getId() + " => " + doc.getData());
                 postList.add(new ItemDetails(doc.getString("title"),
                         "author",
+                        doc.getString("category"),
                         doc.getLong("commentsCount").intValue(),
                         doc.getLong("likes").intValue(),
                         Constants.getDefaultDateFormat(doc.getDate("postDate")),

@@ -1,6 +1,7 @@
 package com.example.test_store.NewPost.add_details;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.test_store.BottomNavigation;
+import com.example.test_store.Constants;
 import com.example.test_store.Database.Database;
 import com.example.test_store.Database.ResultDataListenerAdapter;
 import com.example.test_store.Home.HomeView;
@@ -40,7 +42,7 @@ public class AddPostDetailsPresenter implements AdapterView.OnItemSelectedListen
         view.choose_cat.setAdapter(adapter);
 
         view.choose_cat.setOnItemSelectedListener(this);
-        view.choose_cat.setSelection(1);
+        view.choose_cat.setSelection(0);
         //view.choose_cat.setPopupBackgroundResource(R.drawable.main_motive);
     }
 
@@ -124,7 +126,7 @@ public class AddPostDetailsPresenter implements AdapterView.OnItemSelectedListen
         return new NewPostModel(
                 view.title.getText().toString(),
                 view.content,
-                view.category.getText().toString(),
+                view.choose_cat.getSelectedItem().toString(),
                 Timestamp.now(),
                 authorID);
     }

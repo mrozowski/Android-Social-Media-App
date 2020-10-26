@@ -7,11 +7,13 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.ViewGroup;
 
 import com.example.test_store.Database.Database;
 import com.example.test_store.Database.ResultDataListenerAdapter;
 import com.example.test_store.Dialog.VerificationDialog;
 
+import com.example.test_store.Profile.Profile;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
@@ -195,7 +197,16 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
 
     public void onBack() {
         //back to previous activity
-        view.getActivity().finish();
+
+               //FragmentManager manager = getSupportFragmentManager();
+        //boolean fragmentPopped = view.getFragmentManager().popBackStackImmediate(view.getClass().getName(), 0);
+
+       // if (!fragmentPopped){ //fragment not in back stack, create it.
+            view.getFragmentManager().beginTransaction()
+                    .replace(((ViewGroup)view.getView().getParent()).getId(), new Profile(), "profile")
+                    .addToBackStack(view.getClass().getName())
+                    .commit();
+        //}
     }
 
     public void descChanged() {
