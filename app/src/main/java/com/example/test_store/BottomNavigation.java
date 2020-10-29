@@ -12,6 +12,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.test_store.Home.HomeView;
 import com.example.test_store.NewPost.NewPostSection;
 import com.example.test_store.Profile.Profile;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BottomNavigation extends AppCompatActivity {
@@ -21,9 +24,10 @@ public class BottomNavigation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_navigation);
 
+
         bottom_nav = findViewById(R.id.bottom_nav);
         bottom_nav.setOnNavigationItemSelectedListener(navListener);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeView()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new HomeView()).addToBackStack(null).commit();
     }
 
 
@@ -43,7 +47,7 @@ public class BottomNavigation extends AppCompatActivity {
                             selectedFragment = new HomeView();
                             break;
                     }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, selectedFragment).addToBackStack(null).commit();
                     return true;
                 }
             };

@@ -18,22 +18,40 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.test_store.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import us.feras.mdv.MarkdownView;
 
-public class PostView extends Fragment {
+public class PostView extends Fragment implements PostContract.View {
 
     TextView title, content, author, authorPostCount, postLikes, postDate, category;
     ImageView authorPhoto, likeButton;
-
+    private AdView mAdView;
     private PostPresenter presenter;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_post, container, false);
+
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
         initComponents(view);
         presenter = new PostPresenter(this);
+
+        mAdView = view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
         //WebView - check it later to add more custom look post like adding picture to post
 
@@ -76,6 +94,7 @@ public class PostView extends Fragment {
 
     }
 
+    @Override
     public void showToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }

@@ -36,8 +36,6 @@ public class PostPresenter extends ResultDataListenerAdapter implements PostCont
         database.setListener(this);
         database.getPostDataByID(postID);
 
-        //view.webView.getSettings().setJavaScriptEnabled(true);
-        //view.webView.getSettings().setAllowFileAccess(true);
     }
 
     @Override
@@ -67,6 +65,7 @@ public class PostPresenter extends ResultDataListenerAdapter implements PostCont
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
     public void giveLike() {
         if(!liked){
             database.giveLike(post.getPostID(), post.getAuthorID());
@@ -77,6 +76,7 @@ public class PostPresenter extends ResultDataListenerAdapter implements PostCont
         }
     }
 
+    @Override
     public void openAuthorProfile() {
         OtherUserProfileView authorProfile = new OtherUserProfileView();
         Bundle bundle = new Bundle();

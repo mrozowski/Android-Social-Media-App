@@ -49,4 +49,8 @@
     <string name="search">Search</string>
     <string name="motivation_sentence">Show the world your ideas</string>
     <string name="type_new_post">Type a post here…</string>
+    <string name="login">Login</string>
+    <string name="create_a_new_account">Create a new account</string>
+    <string name="i_have_an_account">I have an account</string>
+    <string name="register">Register</string>
 </resources>

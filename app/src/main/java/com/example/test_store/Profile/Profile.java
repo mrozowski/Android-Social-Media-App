@@ -22,7 +22,7 @@ import com.example.test_store.list.MyRecyclerViewAdapter;
 
 import java.util.ArrayList;
 
-public class Profile extends Fragment implements MyRecyclerViewAdapter.ItemClickListener {
+public class Profile extends Fragment implements MyRecyclerViewAdapter.ItemClickListener, ProfileContract.View {
 
     TextView nick, likes, followers, posts, description;
     ImageButton settings;
@@ -76,6 +76,7 @@ public class Profile extends Fragment implements MyRecyclerViewAdapter.ItemClick
         presenter.openPostActivity(postID);
     }
 
+    @Override
     public void showToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }

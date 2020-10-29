@@ -78,8 +78,8 @@
 
         <ImageView
             android:id="@+id/new_post_image"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="270dp"
+            android:layout_height="270dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="12dp"
             android:layout_row="5"
@@ -91,6 +91,7 @@
             android:id="@+id/new_post_details_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="22dp"
             android:layout_row="6"
             android:layout_column="0"
             android:gravity="center_horizontal"

@@ -31,8 +31,6 @@ public class RegisterPresenter extends ResultDataListenerAdapter {
         database.setListener(this);
     }
 
-
-
     public void onRegisterClicked() {
         String nick = view.mNick.getText().toString().trim();
         String email = view.mEmail.getText().toString().trim();

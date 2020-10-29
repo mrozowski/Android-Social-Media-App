@@ -102,7 +102,7 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
         editProfileFragment.setArguments(bundle);
 
         view.getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(((ViewGroup)view.getView().getParent()).getId(), editProfileFragment, "editProfileFragment")
+                .add(((ViewGroup)view.getView().getParent()).getId(), editProfileFragment, "editProfileFragment")
                 .addToBackStack(view.getClass().getName())
                 .commit();
     }
@@ -192,7 +192,7 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
     }
 
     public void openSettingsActivity() {
-        //view.startActivity(new Intent(view.getContext(), WriteNewPostView.class));
+       // no settings
     }
 
     public boolean onSettingsClick(MenuItem item) {

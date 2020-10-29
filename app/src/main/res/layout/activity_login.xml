@@ -16,7 +16,7 @@
         android:layout_marginEnd="175dp"
         android:layout_marginBottom="560dp"
         android:fontFamily="sans-serif-black"
-        android:text="Login"
+        android:text="@string/login"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,11 +27,11 @@
 
     <EditText
         android:id="@+id/email_field"
-        android:layout_width="360dp"
+        android:layout_width="320dp"
         android:layout_height="42dp"
         android:layout_marginTop="50dp"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,11 +42,11 @@
 
     <EditText
         android:id="@+id/pass_field"
-        android:layout_width="360dp"
+        android:layout_width="320dp"
         android:layout_height="42dp"
         android:layout_marginTop="24dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

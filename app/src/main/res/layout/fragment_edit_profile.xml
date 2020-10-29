@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="?android:attr/windowBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -46,7 +47,6 @@
                         android:id="@+id/user_avatar"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-
                         android:contentDescription="@string/avatar"
                         android:scaleType="centerCrop" />
                 </androidx.cardview.widget.CardView>

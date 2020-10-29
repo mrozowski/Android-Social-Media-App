@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.test_store">
+    package="com.example.test_store"
+    >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -25,7 +26,11 @@
             android:windowSoftInputMode="adjustPan"/>
         <!--<activity android:name=".Profile.Profile" /> -->
         <!--<activity android:name=".ProfileEdit.EditProfileView" />-->
-        <activity android:name=".Post.PostView" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2476411962578956~4124236829"/>
     </application>
+
+
 
 </manifest>
