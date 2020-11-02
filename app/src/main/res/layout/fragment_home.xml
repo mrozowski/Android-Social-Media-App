@@ -47,6 +47,13 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ad_container"
+            android:layout_margin="10dp"
+            android:elevation="3dp"
+            android:layout_below="@id/home_post_list_view"/>
 
     </RelativeLayout>
 

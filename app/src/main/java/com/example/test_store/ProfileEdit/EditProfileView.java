@@ -16,12 +16,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.test_store.Database.Database;
 import com.example.test_store.Dialog.VerificationDialogListener;
 import com.example.test_store.R;
 
 
 
-public class EditProfileView extends Fragment implements VerificationDialogListener {
+public class EditProfileView extends Fragment implements VerificationDialogListener, EditProfileContract.View {
     String userID;
     EditProfilePresenter presenter;
     EditText nick, email, phone, desc, password;
@@ -34,7 +35,7 @@ public class EditProfileView extends Fragment implements VerificationDialogListe
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         initComponents(view);
-        presenter = new EditProfilePresenter(this);
+        presenter = new EditProfilePresenter(this, new Database());
         setActions();
         return view;
     }

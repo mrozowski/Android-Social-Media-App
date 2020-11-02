@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.test_store.Database.Database;
 import com.example.test_store.R;
 
 public class Login extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         initComponents();
         setButtons();
-        presenter = new LoginPresenter(this);
+        presenter = new LoginPresenter(this, new Database());
     }
 
     private void setButtons() {

@@ -5,4 +5,6 @@
     <color name="colorPrimaryDark">#222222</color>
     <color name="colorSoftBlue">#F3FCFF</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="ad_yellow">#FDCB5C</color>
+    <color name="ad_heading">#3C5A99</color>
 </resources>

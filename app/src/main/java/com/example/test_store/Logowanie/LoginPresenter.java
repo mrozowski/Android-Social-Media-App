@@ -2,6 +2,7 @@ package com.example.test_store.Logowanie;
 
 import android.content.Intent;
 import android.text.TextUtils;
+
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,9 +15,9 @@ public class LoginPresenter extends ResultDataListenerAdapter {
     private Login view;
     private Database database;
 
-    public LoginPresenter(Login view) {
+    public LoginPresenter(Login view, Database db) {
         this.view = view;
-        database = new Database();
+        database = db;
         database.setListener(this);
         checkIfLoggedIn();
     }
@@ -28,9 +29,11 @@ public class LoginPresenter extends ResultDataListenerAdapter {
         }
     }
 
-    private boolean validateEmail(String email){
+    public boolean validateEmail(String email){
         if(TextUtils.isEmpty(email)){
-            view.mEmail.setError("Email is required");
+            return false;
+        }
+        else if(!email.matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
             return false;
         }
         return true;
@@ -38,12 +41,10 @@ public class LoginPresenter extends ResultDataListenerAdapter {
 
     private boolean validatePassword(String password){
         if(TextUtils.isEmpty(password)){
-            view.mPassword.setError("Password is required");
             return false;
         }
         //Minimum eight characters, at least one letter and one number:
         if(!password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")){
-            view.mPassword.setError("Wrong password");
             return false;
         }
         return true;
@@ -53,8 +54,14 @@ public class LoginPresenter extends ResultDataListenerAdapter {
         String email = view.mEmail.getText().toString().trim();
         String password = view.mPassword.getText().toString().trim();
 
-       if(!validateEmail(email)) return;
-       if(!validatePassword(password)) return;
+       if(!validateEmail(email)){
+           view.mEmail.setError("Wrong Email");
+           return;
+       }
+       if(!validatePassword(password)){
+           view.mPassword.setError("Wrong password");
+           return;
+       }
 
         view.progressBar.setVisibility(View.VISIBLE);
         database.login(email, password);

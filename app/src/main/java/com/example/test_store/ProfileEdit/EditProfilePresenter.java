@@ -42,9 +42,9 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
     private boolean isPasswordChanged = false;
     private Database database;
 
-    public EditProfilePresenter(EditProfileView view) {
+    public EditProfilePresenter(EditProfileView view, Database db) {
         this.view = view;
-        database = new Database();
+        database = db;
         database.setListener(this);
 
         database.getCurrentUserProfilePicture(view.profileImage);
@@ -71,27 +71,26 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
 
     @Override
     public void saveData() {
-
         if(isImageChanged && imageUrl !=null){
             database.updateProfilePictureOnFirebase(imageUrl);
         }
         if(isDescChanged){
-            if(validateDescription()) {
-                String new_desc = view.desc.getText().toString().trim();
+            String new_desc = view.desc.getText().toString().trim();
+            if(validateDescription(new_desc)) {
                 database.changeDescription(new_desc);
             }
         }
         if(isNickChanged){
-            if(validateNick()){
-                String new_nick = view.nick.getText().toString().trim();
+            String new_nick = view.nick.getText().toString().trim();
+            if(validateNick(new_nick)){
                 database.changeNick(new_nick);
             }
         }
         if(isPhoneChanged){
-            if(validatePhone()){
-                String new_phone = view.phone.getText().toString().trim();
+            String new_phone = view.phone.getText().toString().trim();
+            if(validatePhone(new_phone))
                 database.changePhoneNumber(new_phone);
-            }
+
         }
         if(isEmailChanged || isPasswordChanged){
             //Those are sensitives dates and firebase may require user to reLogin for verification
@@ -103,32 +102,26 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
     }
 
     private void setDefaultFlags() {
-        //isEmailChanged = false;
-        //isPasswordChanged = false;
         isPhoneChanged = false;
         isNickChanged = false;
         isDescChanged = false;
         isImageChanged = false;
     }
 
-    private boolean validateEmail() {
+    public boolean validateEmail(String new_email) {
         //Note... add regex and then add it to Constant class
-        String new_email = view.email.getText().toString().trim();
         if(new_email.length() < 5)
             return false;
         return true;
-
     }
 
-    private boolean validatePhone() {
-        String new_phone = view.phone.getText().toString().trim();
+    public boolean validatePhone(String new_phone) {
         //add regex later
         if(new_phone.length() == 9) return true;
         return false;
     }
 
-    private boolean validateNick() {
-        String new_nick = view.nick.getText().toString().trim();
+    public boolean validateNick(String new_nick) {
         //update regex later
         if(new_nick.length() < 3) return false;
         if(!new_nick.matches("^[^0-9][^@# ]+$"))
@@ -137,13 +130,11 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
 
     }
 
-    private boolean validateDescription() {
-        String new_desc = view.desc.getText().toString().trim();
+    private boolean validateDescription(String new_desc) {
         return new_desc.length() <= 255;
     }
 
-    private boolean validatePassword() {
-        String new_pass = view.password.getText().toString().trim();
+    private boolean validatePassword(String new_pass) {
         //Also add regex later and maybe toast or setError() to notify user what is wrong
         if(new_pass.length() < 8) return false;
         return true;
@@ -151,21 +142,19 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
 
     protected void changeSensitiveData(String auth){
         if(isEmailChanged){
-            if(validateEmail()){
-                String new_email = view.email.getText().toString().trim();
+            String new_email = view.email.getText().toString().trim();
+            if(validateEmail(new_email)){
                 database.changeEmail(new_email, auth);
                 isEmailChanged = false;
             }
         }
         if(isPasswordChanged){
-            if(validatePassword()){
-                String new_pass = view.password.getText().toString().trim();
+            String new_pass = view.password.getText().toString().trim();
+            if(validatePassword(new_pass)){
                 database.changePassword(new_pass, auth);
                 isPasswordChanged = false;
             }
         }
-
-
     }
 
 
