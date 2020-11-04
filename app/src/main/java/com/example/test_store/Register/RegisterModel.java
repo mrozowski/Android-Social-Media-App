@@ -22,7 +22,6 @@ public class RegisterModel {
         followers = 0;
     }
 
-
     public String getNick() {
         return nick;
     }

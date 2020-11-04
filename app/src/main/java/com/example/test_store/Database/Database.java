@@ -364,12 +364,9 @@ public class Database implements DTO{
         storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                //Picasso.get().load(uri).into(profile);
+
                 Picasso.get().load(uri).into(profile);
-                //listener.onReceivePictureListener();
-//                Bitmap bitmap = null;
-//
-//                Log.d("MyTAG", "url: "+ bitmap.toString());
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

@@ -13,37 +13,29 @@ import android.widget.Toast;
 import com.example.test_store.Database.Database;
 import com.example.test_store.R;
 
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity implements LoginContract.View{
     private LoginPresenter presenter;
     EditText mEmail, mPassword;
     Button mLogin;
     TextView mRegisterButton;
     ProgressBar progressBar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initComponents();
-        setButtons();
-        presenter = new LoginPresenter(this, new Database());
+        presenter = new LoginPresenter(this);
     }
 
-    private void setButtons() {
-        mLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.onLoginClicked();
-            }
-        });
+    @Override
+    public void onLoginClick(View v) {
+        presenter.onLoginClicked();
+    }
 
-        mRegisterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.openRegisterActivity();
-            }
-        });
+    @Override
+    public void onRegisterClick(View v) {
+        presenter.openRegisterActivity();
     }
 
     private void initComponents() {
@@ -54,6 +46,7 @@ public class Login extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
     }
 
+    @Override
     public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }

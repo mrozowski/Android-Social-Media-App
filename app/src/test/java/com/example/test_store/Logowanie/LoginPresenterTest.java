@@ -47,4 +47,40 @@ public class LoginPresenterTest {
         boolean result = presenter.validateEmail(emptyEmail);
         assertTrue(result);
     }
+
+    @Test
+    public void validatePassword_emptyPass(){
+        String emptyPass = "";
+        boolean result = presenter.validatePassword(emptyPass);
+        assertFalse(result);
+    }
+
+    @Test
+    public void validatePassword_tooShortPass(){
+        String shortPass = "123qwe";
+        boolean result = presenter.validatePassword(shortPass);
+        assertFalse(result);
+    }
+
+    @Test
+    public void validatePassword_onlyLettersPass(){
+        String pass = "zasxcdfvbghn";
+        boolean result = presenter.validatePassword(pass);
+        assertFalse(result);
+    }
+
+    @Test
+    public void validatePassword_onlyNumbersPass(){
+        String pass = "1111122334455";
+        boolean result = presenter.validatePassword(pass);
+        assertFalse(result);
+    }
+
+    @Test
+    public void validatePassword_correctPass(){
+        String correctPass = "zaq12wsx3";
+        boolean result = presenter.validatePassword(correctPass);
+        assertTrue(result);
+    }
+
 }

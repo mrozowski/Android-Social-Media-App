@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import com.example.test_store.BottomNavigation;
 import com.example.test_store.Database.Database;
 import com.example.test_store.Database.ResultDataListenerAdapter;
+import com.example.test_store.Logowanie.Login;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -21,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class RegisterPresenter extends ResultDataListenerAdapter {
+public class RegisterPresenter extends ResultDataListenerAdapter implements RegisterContract.Presenter{
     private Register view;
     private Database database;
 
@@ -31,12 +33,12 @@ public class RegisterPresenter extends ResultDataListenerAdapter {
         database.setListener(this);
     }
 
+    @Override
     public void onRegisterClicked() {
         String nick = view.mNick.getText().toString().trim();
         String email = view.mEmail.getText().toString().trim();
         String password = view.mPassword.getText().toString().trim();
         String phone = view.mPhone.getText().toString().trim();
-
 
         //validation to the model
         if(!validateNick(nick)) return;
@@ -46,13 +48,11 @@ public class RegisterPresenter extends ResultDataListenerAdapter {
 
         // If everything is good then create new user
         RegisterModel newUser = new RegisterModel(nick, email, phone);
-
         view.progressBar.setVisibility(View.VISIBLE);
 
         //and register new user
         database.register(newUser, password);
     }
-
 
     @Override
     public void onDataResultListener(String result) {
@@ -64,11 +64,14 @@ public class RegisterPresenter extends ResultDataListenerAdapter {
         if (isSuccess) {
             view.startActivity(new Intent(view.getApplicationContext(), BottomNavigation.class));
         }
+    }
 
+    public boolean isEmpty(String string){
+        return TextUtils.isEmpty(string);
     }
 
     private boolean validateNick(String nick) {
-        if(TextUtils.isEmpty(nick)){
+        if(isEmpty(nick)){
             view.mNick.setError("Nick is required");
             return false;
         }
@@ -84,11 +87,12 @@ public class RegisterPresenter extends ResultDataListenerAdapter {
             view.mNick.setError("Nick is incorrect");
             return false;
         }
+        view.mNick.setError(null);
         return true;
     }
 
     private boolean validateEmail(String email){
-        if(TextUtils.isEmpty(email)){
+        if(isEmpty(email)){
             view.mEmail.setError("Email is required");
             return false;
         }
@@ -100,7 +104,7 @@ public class RegisterPresenter extends ResultDataListenerAdapter {
     }
 
     private boolean validatePassword(String password){
-        if(TextUtils.isEmpty(password)){
+        if(isEmpty(password)){
             view.mPassword.setError("Password is required");
             return false;
         }
@@ -117,7 +121,7 @@ public class RegisterPresenter extends ResultDataListenerAdapter {
     }
 
     private boolean validatePhone(String phone) {
-        if(TextUtils.isEmpty(phone)){
+        if(isEmpty(phone)){
             view.mPhone.setError("Phone is required");
             return false;
         }
@@ -128,6 +132,8 @@ public class RegisterPresenter extends ResultDataListenerAdapter {
         return true;
     }
 
-
-
+    @Override
+    public void openLoginActivity() {
+        view.startActivity(new Intent(view.getApplicationContext(), Login.class));
+    }
 }

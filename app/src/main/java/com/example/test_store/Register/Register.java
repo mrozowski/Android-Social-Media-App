@@ -1,35 +1,19 @@
 package com.example.test_store.Register;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.test_store.BottomNavigation;
-import com.example.test_store.Logowanie.Login;
 import com.example.test_store.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
-public class Register extends AppCompatActivity {
+public class Register extends AppCompatActivity implements RegisterContract.View{
     private RegisterPresenter presenter;
     EditText mNick, mEmail, mPassword, mPhone;
     Button mRegister;
@@ -43,24 +27,30 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         initComponents();
         presenter = new RegisterPresenter(this);
-        setButtons();
+        setEvents();
     }
 
-    private void setButtons() {
-        mRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.onRegisterClicked();
-            }
-        });
-        mLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Login.class));
-
-            }
-        });
+    @Override
+    public void onLoginClick(View v) {
+        presenter.openLoginActivity();
     }
+
+    @Override
+    public void onRegisterClick(View v) {
+        presenter.onRegisterClicked();
+    }
+
+    private void setEvents() {
+        mNick.setOnFocusChangeListener(validateOnFocusChange);
+    }
+
+    private View.OnFocusChangeListener validateOnFocusChange = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if(!hasFocus)
+                presenter.validateNick(mNick.getText().toString().trim());
+        }
+    };
 
     private void initComponents() {
         mNick = findViewById(R.id.name_field);
@@ -72,6 +62,7 @@ public class Register extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar2);
     }
 
+    @Override
     public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }

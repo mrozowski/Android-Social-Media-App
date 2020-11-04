@@ -11,9 +11,19 @@ import com.example.test_store.Database.Database;
 import com.example.test_store.Database.ResultDataListenerAdapter;
 import com.example.test_store.Register.Register;
 
-public class LoginPresenter extends ResultDataListenerAdapter {
+import static com.example.test_store.Constants.EMAIL_REGEX;
+import static com.example.test_store.Constants.PASSWORD_REGEX;
+
+public class LoginPresenter extends ResultDataListenerAdapter implements LoginContract.Presenter{
     private Login view;
     private Database database;
+
+    public LoginPresenter(Login view){
+        this.view = view;
+        database = new Database();
+        database.setListener(this);
+        checkIfLoggedIn();
+    }
 
     public LoginPresenter(Login view, Database db) {
         this.view = view;
@@ -30,21 +40,15 @@ public class LoginPresenter extends ResultDataListenerAdapter {
     }
 
     public boolean validateEmail(String email){
-        if(TextUtils.isEmpty(email)){
-            return false;
-        }
-        else if(!email.matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
-            return false;
-        }
-        return true;
+        return email.matches(EMAIL_REGEX);
     }
 
-    private boolean validatePassword(String password){
+    public boolean validatePassword(String password){
         if(TextUtils.isEmpty(password)){
             return false;
         }
         //Minimum eight characters, at least one letter and one number:
-        if(!password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")){
+        if(!password.matches(PASSWORD_REGEX)){
             return false;
         }
         return true;

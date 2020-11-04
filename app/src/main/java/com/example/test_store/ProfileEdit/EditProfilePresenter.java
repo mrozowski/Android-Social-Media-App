@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ViewGroup;
 
@@ -22,7 +23,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import static com.example.test_store.Constants.EMAIL_REGEX;
 import static com.example.test_store.Constants.IMG_INTEND_REQUEST_CODE;
+import static com.example.test_store.Constants.PASSWORD_REGEX;
 import static com.example.test_store.Constants.USER_PROFILE_PICTURE_FILE;
 
 public class EditProfilePresenter extends ResultDataListenerAdapter implements EditProfileContract.Presenter {
@@ -109,10 +112,7 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
     }
 
     public boolean validateEmail(String new_email) {
-        //Note... add regex and then add it to Constant class
-        if(new_email.length() < 5)
-            return false;
-        return true;
+        return new_email.matches(EMAIL_REGEX);
     }
 
     public boolean validatePhone(String new_phone) {
@@ -135,8 +135,13 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
     }
 
     private boolean validatePassword(String new_pass) {
-        //Also add regex later and maybe toast or setError() to notify user what is wrong
-        if(new_pass.length() < 8) return false;
+        if(TextUtils.isEmpty(new_pass)){
+            return false;
+        }
+        //Minimum eight characters, at least one letter and one number:
+        if(!new_pass.matches(PASSWORD_REGEX)){
+            return false;
+        }
         return true;
     }
 
