@@ -10,7 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.test_store.Database.Database;
 import com.example.test_store.R;
 
 public class Login extends AppCompatActivity implements LoginContract.View{

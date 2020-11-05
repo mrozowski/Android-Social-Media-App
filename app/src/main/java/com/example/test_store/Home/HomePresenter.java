@@ -1,6 +1,5 @@
 package com.example.test_store.Home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.test_store.Constants;
@@ -74,7 +73,6 @@ public class HomePresenter extends ResultDataListenerAdapter implements MyRecycl
                 if(nativeAd!=null){
                     nativeAd = unifiedNativeAd;
                 }
-
                 UnifiedNativeAdView adView = (UnifiedNativeAdView) view.getActivity().getLayoutInflater().inflate(R.layout.native_ad_layout, null);
                 populateNativeAd(unifiedNativeAd, adView);
                 view.cardView.addView(adView);
@@ -149,7 +147,6 @@ public class HomePresenter extends ResultDataListenerAdapter implements MyRecycl
         }
 
         adView.setNativeAd(nativeAd);
-
     }
 
     private void showPostList(){
@@ -163,7 +160,7 @@ public class HomePresenter extends ResultDataListenerAdapter implements MyRecycl
     }
 
 
-    public void openPostActivity(String postID){
+    public void openPostFragment(String postID){
         PostView postFragment = new PostView();
         Bundle bundle = new Bundle();
         bundle.putString("postID", postID);
@@ -178,7 +175,7 @@ public class HomePresenter extends ResultDataListenerAdapter implements MyRecycl
     @Override
     public void onItemClick(View view, int position) {
         String postID = adapter.getItem(position);
-        openPostActivity(postID);
+        openPostFragment(postID);
     }
 
     @Override
@@ -200,7 +197,5 @@ public class HomePresenter extends ResultDataListenerAdapter implements MyRecycl
             Log.d(TAG, "Couldn't load user posts list");
         }
     }
-
-
 
 }

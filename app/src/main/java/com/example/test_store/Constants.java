@@ -12,6 +12,8 @@ public class Constants {
     public final static String TAG = "MyTAG";
     public final static String EMAIL_REGEX = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     public final static String PASSWORD_REGEX = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+    public final static String PHONE_REGEX = "^[+0-9]{8,12}$";
+    public final static String NICK_REGEX = "^[a-zA-Z]\\w*$";
     public final static int IMG_INTEND_REQUEST_CODE = 1002;
 
     public static String getProfileDirectory(String userID){

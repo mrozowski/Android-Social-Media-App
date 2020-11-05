@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -39,7 +41,6 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
     private Profile view;
     private Database database;
     private AppUser appUser;
-
     ArrayList<ItemDetails> postList;
 
     public ProfilePresenter(Profile view) {
@@ -80,7 +81,7 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
         view.description.setText(appUser.getDescription());
     }
 
-    public void openPostActivity(String postID){
+    public void openPostFragment(String postID){
         PostView postFragment = new PostView();
         Bundle bundle = new Bundle();
         bundle.putString("postID", postID);
@@ -91,7 +92,7 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
                 .commit();
     }
 
-    public void openEditProfileActivity() {
+    public void openEditProfileFragment() {
         EditProfileView editProfileFragment = new EditProfileView();
         Bundle bundle = new Bundle();
         bundle.putString("userID", appUser.getUserID());
@@ -128,15 +129,8 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
             loadUserPostList();
             //save to internal storage
            saveUserDataToInternalStorage();
-
         }
     }
-
-//    @Override
-//    public void onReceivePictureListener(Bitmap pic) {
-//        saveUserProfilePictureToInternalStorage(pic);
-//    }
-
 
     @Override
     public void onReceiveUserPostListListener(Task<QuerySnapshot> task) {
@@ -156,16 +150,13 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
         else{
             Log.d(TAG, "Couldn't load user posts list");
         }
-
     }
 
     private void saveUserProfilePictureToInternalStorage(Bitmap pic) {
         FileOutputStream userFile = null;
-
         //get bitmap of user profile picture
         //Log.d("MyTAG", view.profileImage.get);
         //BitmapDrawable profileDrawable = (BitmapDrawable) view.profileImage.getBackground();
-
         try{
             File f = new File(view.getActivity().getFilesDir(), "profile.png");
             userFile = new FileOutputStream(f);
@@ -173,7 +164,6 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-
         }
     }
 
@@ -188,17 +178,28 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
         } catch (IOException e){
             e.printStackTrace();
         }
-
     }
 
     public void openSettingsActivity() {
        // no settings
     }
 
-    public boolean onSettingsClick(MenuItem item) {
+    public void onSettingsClick(View v) {
+        PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return onSettingsItemClick(item);
+            }
+        });
+        popupMenu.inflate(R.menu.settings_menu);
+        popupMenu.show();
+    }
+
+    private boolean onSettingsItemClick(MenuItem item){
         switch (item.getItemId()){
             case R.id.menu_edit_profile:
-                openEditProfileActivity();
+                openEditProfileFragment();
                 return true;
             case R.id.menu_settings:
                 openSettingsActivity();

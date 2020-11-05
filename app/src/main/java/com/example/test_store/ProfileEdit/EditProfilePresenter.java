@@ -25,18 +25,16 @@ import java.io.IOException;
 
 import static com.example.test_store.Constants.EMAIL_REGEX;
 import static com.example.test_store.Constants.IMG_INTEND_REQUEST_CODE;
+import static com.example.test_store.Constants.NICK_REGEX;
 import static com.example.test_store.Constants.PASSWORD_REGEX;
+import static com.example.test_store.Constants.PHONE_REGEX;
 import static com.example.test_store.Constants.USER_PROFILE_PICTURE_FILE;
 
 public class EditProfilePresenter extends ResultDataListenerAdapter implements EditProfileContract.Presenter {
 
     private EditProfileView view; //reference for the view
     private EditProfileModel model;
-    private StorageReference storageReference;
-    private FirebaseFirestore fStorage;
-    private DocumentReference fileRef;
     private Uri imageUrl;
-    private String auth;
     private boolean isImageChanged = false;
     private boolean isDescChanged = false;
     private boolean isNickChanged = false;
@@ -49,7 +47,6 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
         this.view = view;
         database = db;
         database.setListener(this);
-
         database.getCurrentUserProfilePicture(view.profileImage);
         //loadProfilePictureFromStorage();
     }
@@ -116,18 +113,12 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
     }
 
     public boolean validatePhone(String new_phone) {
-        //add regex later
-        if(new_phone.length() == 9) return true;
-        return false;
+        return !new_phone.matches(PHONE_REGEX);
     }
 
     public boolean validateNick(String new_nick) {
-        //update regex later
         if(new_nick.length() < 3) return false;
-        if(!new_nick.matches("^[^0-9][^@# ]+$"))
-            return false;
-        return true;
-
+        return new_nick.matches(NICK_REGEX);
     }
 
     private boolean validateDescription(String new_desc) {
@@ -135,14 +126,8 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
     }
 
     private boolean validatePassword(String new_pass) {
-        if(TextUtils.isEmpty(new_pass)){
-            return false;
-        }
         //Minimum eight characters, at least one letter and one number:
-        if(!new_pass.matches(PASSWORD_REGEX)){
-            return false;
-        }
-        return true;
+        return new_pass.matches(PASSWORD_REGEX);
     }
 
     protected void changeSensitiveData(String auth){
@@ -161,7 +146,6 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
             }
         }
     }
-
 
     @Override
     public void changeImage() {
@@ -190,17 +174,11 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
     }
 
     public void onBack() {
-        //back to previous activity
-
-               //FragmentManager manager = getSupportFragmentManager();
-        //boolean fragmentPopped = view.getFragmentManager().popBackStackImmediate(view.getClass().getName(), 0);
-
-       // if (!fragmentPopped){ //fragment not in back stack, create it.
-            view.getFragmentManager().beginTransaction()
-                    .replace(((ViewGroup)view.getView().getParent()).getId(), new Profile(), "profile")
-                    .addToBackStack(view.getClass().getName())
-                    .commit();
-        //}
+        //back to profile activity
+        view.getFragmentManager().beginTransaction()
+                .replace(((ViewGroup)view.getView().getParent()).getId(), new Profile(), "profile")
+                .addToBackStack(view.getClass().getName())
+                .commit();
     }
 
     public void descChanged() {

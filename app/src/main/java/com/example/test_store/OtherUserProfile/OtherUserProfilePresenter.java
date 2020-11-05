@@ -37,7 +37,7 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.example.test_store.Constants.TAG;
 import static com.example.test_store.Constants.USER_DATA_FILE;
 
-public class OtherUserProfilePresenter extends ResultDataListenerAdapter {
+public class OtherUserProfilePresenter extends ResultDataListenerAdapter implements OtherUserProfileContract.Presenter {
     private OtherUserProfileView view;
     private AppUser appUser; // add a new model
     private Database database;
@@ -51,21 +51,21 @@ public class OtherUserProfilePresenter extends ResultDataListenerAdapter {
         database.setListener(this);
     }
 
+    @Override
     public void getUser(String userID) {
         connectUser(userID);
         loadProfileImage(userID);
     }
 
-
     private void loadProfileImage(String userID) {
         database.getUserProfilePictureByID(view.profileImage, userID);
     }
 
-    public void connectUser(String userID) {
+    private void connectUser(String userID) {
         database.getUserDataByID(userID);
     }
 
-    protected void loadUserPostList(){
+    private void loadUserPostList(){
         database.getUserPostList(appUser.getUserID());
     }
 
@@ -78,6 +78,7 @@ public class OtherUserProfilePresenter extends ResultDataListenerAdapter {
         view.recyclerView.setAdapter(view.adapter);
         view.recyclerView.setNestedScrollingEnabled(false);
     }
+
     private void loadUserData() {
         view.nick.setText(appUser.getNick());
         view.likes.setText(String.valueOf(appUser.getLikes()));
@@ -86,6 +87,7 @@ public class OtherUserProfilePresenter extends ResultDataListenerAdapter {
         view.description.setText(appUser.getDescription());
     }
 
+    @Override
     public void openPostFragment(String postID){
         PostView postFragment = new PostView();
         Bundle bundle = new Bundle();
@@ -96,9 +98,6 @@ public class OtherUserProfilePresenter extends ResultDataListenerAdapter {
                 .addToBackStack(view.getClass().getName())
                 .commit();
     }
-
-
-
 
     @Override
     public void onDataResultListener(String result) {

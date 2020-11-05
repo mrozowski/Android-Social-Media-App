@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.test_store.R;
 import com.example.test_store.list.MyRecyclerViewAdapter;
 
-public class OtherUserProfileView extends Fragment implements MyRecyclerViewAdapter.ItemClickListener {
+public class OtherUserProfileView extends Fragment implements MyRecyclerViewAdapter.ItemClickListener, OtherUserProfileContract.View {
     TextView nick, likes, followers, posts, description;
     ImageView profileImage;
     MyRecyclerViewAdapter adapter;
@@ -59,6 +59,7 @@ public class OtherUserProfileView extends Fragment implements MyRecyclerViewAdap
         presenter.openPostFragment(postID);
     }
 
+    @Override
     public void showToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }

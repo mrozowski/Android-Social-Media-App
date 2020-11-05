@@ -70,7 +70,7 @@ public class RegisterPresenter extends ResultDataListenerAdapter implements Regi
         return TextUtils.isEmpty(string);
     }
 
-    private boolean validateNick(String nick) {
+    boolean validateNick(String nick) {
         if(isEmpty(nick)){
             view.mNick.setError("Nick is required");
             return false;

@@ -25,12 +25,9 @@ public class HomeView extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-
         cardView = view.findViewById(R.id.ad_container);
         recyclerView = view.findViewById(R.id.home_post_list_view);
         presenter = new HomePresenter(this);
         return view;
-
     }
 }

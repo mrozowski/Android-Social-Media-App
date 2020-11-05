@@ -23,7 +23,7 @@ import com.example.test_store.R;
 
 
 public class EditProfileView extends Fragment implements VerificationDialogListener, EditProfileContract.View {
-    String userID;
+    private String userID;
     EditProfilePresenter presenter;
     EditText nick, email, phone, desc, password;
     TextView userName;
@@ -60,59 +60,14 @@ public class EditProfileView extends Fragment implements VerificationDialogListe
     }
 
     private void setActions() {
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.saveData();
-            }
-        });
-        profileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.changeImage();
-            }
-        });
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.onBack();
-            }
-        });
-        desc.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                presenter.descChanged();
-                return true;
-            }
-        });
-        phone.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                presenter.phoneChanged();
-                return false;
-            }
-        });
-        nick.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                presenter.nickChanged();
-                return false;
-            }
-        });
-        email.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                presenter.emailChanged();
-                return false;
-            }
-        });
-        password.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                presenter.passwordChanged();
-                return false;
-            }
-        });
+        saveButton.setOnClickListener(saveListener);
+        profileImage.setOnClickListener(profileImgListener);
+        backButton.setOnClickListener(backListener);
+        desc.setOnKeyListener(descFieldListener);
+        phone.setOnKeyListener(phoneFieldListener);
+        nick.setOnKeyListener(nickFieldListener);
+        email.setOnKeyListener(emailFieldListener);
+        password.setOnKeyListener(passwordFieldListener);
     }
 
 
@@ -134,12 +89,72 @@ public class EditProfileView extends Fragment implements VerificationDialogListe
         presenter.onActivityResult(requestCode, resultCode, data);
     }
 
-    protected void showToast(String message){
-        Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
-    }
-
     @Override
     public void onOkButtonListener(String password) {
         presenter.changeSensitiveData(password);
     }
+
+    @Override
+    public void showToast(String message){
+        Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
+    }
+
+
+    private View.OnClickListener saveListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            presenter.saveData();
+        }
+    };
+
+    private View.OnClickListener profileImgListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            presenter.changeImage();
+        }
+    };
+
+    private View.OnClickListener backListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            presenter.onBack();
+        }
+    };
+
+    private View.OnKeyListener descFieldListener = new View.OnKeyListener() {
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            presenter.descChanged();
+            return true;
+        }
+    };
+    private View.OnKeyListener phoneFieldListener = new View.OnKeyListener() {
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            presenter.phoneChanged();
+            return false;
+        }
+    };
+    private View.OnKeyListener nickFieldListener = new View.OnKeyListener() {
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            presenter.nickChanged();
+            return false;
+        }
+    };
+    private View.OnKeyListener emailFieldListener = new View.OnKeyListener() {
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            presenter.emailChanged();
+            return false;
+        }
+    };
+    private View.OnKeyListener passwordFieldListener = new View.OnKeyListener() {
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            presenter.passwordChanged();
+            return false;
+        }
+    };
+
 }

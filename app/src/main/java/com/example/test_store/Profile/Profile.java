@@ -7,20 +7,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.test_store.R;
-import com.example.test_store.list.ItemDetails;
+
 import com.example.test_store.list.MyRecyclerViewAdapter;
 
-import java.util.ArrayList;
+
 
 public class Profile extends Fragment implements MyRecyclerViewAdapter.ItemClickListener, ProfileContract.View {
 
@@ -38,24 +36,16 @@ public class Profile extends Fragment implements MyRecyclerViewAdapter.ItemClick
         initComponents(view);
         presenter = new ProfilePresenter(this);
 
-        settings.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(final View v) {
-                PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        return presenter.onSettingsClick(item);
-                    }
-                });
-                popupMenu.inflate(R.menu.settings_menu);
-                popupMenu.show();
-            }
-        });
-
+        settings.setOnClickListener(settingsListener);
         return view;
     }
 
+    private View.OnClickListener settingsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            presenter.onSettingsClick(v);
+        }
+    };
 
     private void initComponents(View view){
         nick = view.findViewById(R.id.user_name);
@@ -68,12 +58,10 @@ public class Profile extends Fragment implements MyRecyclerViewAdapter.ItemClick
         recyclerView = view.findViewById(R.id.recyclerView);
     }
 
-
     @Override
     public void onItemClick(View view, int position) {
-        //Toast.makeText(this,"Clicked " + adapter.getItemId(position), Toast.LENGTH_SHORT).show();
         String postID = adapter.getItem(position);
-        presenter.openPostActivity(postID);
+        presenter.openPostFragment(postID);
     }
 
     @Override
