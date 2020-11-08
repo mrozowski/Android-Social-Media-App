@@ -35,14 +35,12 @@ public class PostPresenter extends ResultDataListenerAdapter implements PostCont
         database = new Database();
         database.setListener(this);
         database.getPostDataByID(postID);
-
     }
 
     @Override
     public void onDataResultListener(String result) {
         view.showToast(result);
     }
-
 
     @Override
     public void onReceivePostDataListener(PostModel post) {
@@ -52,12 +50,9 @@ public class PostPresenter extends ResultDataListenerAdapter implements PostCont
     }
 
     private void showPost() {
-
         view.title.setText(post.getTitle());
         view.content.setText(HtmlCompat.fromHtml(post.getContent(), HtmlCompat.FROM_HTML_MODE_LEGACY));
-        // view.webView.loadDataWithBaseURL(null, post.getContent(), "text/html", "utf-8", null);
         view.category.setText(post.getCategory());
-        //view.webView.loadData(post.getContent(), "text/html; charset=utf-8", "UTF-8");
         view.author.setText((post.getAuthorNick()));
         view.authorPostCount.setText(String.valueOf(post.getAuthorPostCount()));
         view.postLikes.setText(String.valueOf(post.getLikes()));

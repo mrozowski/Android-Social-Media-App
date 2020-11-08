@@ -27,28 +27,12 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.example.test_store.Constants.IMG_INTEND_REQUEST_CODE;
 import static com.example.test_store.Constants.USER_DATA_FILE;
 
-public class WriteNewPostPresenter implements EditorControlBar.EditorControlListener {
+public class WriteNewPostPresenter implements WriteNewPostContract.Presenter{
     private WriteNewPostView view;
 
     public WriteNewPostPresenter(WriteNewPostView writeNewPostView) {
         view = writeNewPostView;
     }
-
-
-    public void setTextEditor() {
-//        view.markDEditor.configureEditor(
-//                getProfileDirectory(new Database().getUserID() + "/user_posts_photo/"),//server url for image upload
-//                "",              //serverToken
-//                true,           // isDraft: set true when you are loading draft
-//                "Type here...", //default hint of input box
-//                NORMAL
-//        );
-//
-//        view.markDEditor.loadDraft(new DraftModel(null));
-//        view.editorControlBar.setEditorControlListener(this);
-//        view.editorControlBar.setEditor(view.markDEditor);
-    }
-
 
     protected void openGallery() {
         try {
@@ -66,15 +50,7 @@ public class WriteNewPostPresenter implements EditorControlBar.EditorControlList
         }
 
     }
-    @Override
-    public void onInsertImageClicked() {
-        openGallery();
-    }
 
-    @Override
-    public void onInserLinkClicked() {
-        view.showToast("Link");
-    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == IMG_INTEND_REQUEST_CODE){
@@ -87,27 +63,20 @@ public class WriteNewPostPresenter implements EditorControlBar.EditorControlList
         }
     }
 
+    @Override
     public void goBack() {
         view.finish();
     }
 
+    @Override
     public void goNext() {
         String content = view.postContent.getText().toString();
         Intent intent = new Intent(view.getApplicationContext(), AddPostDetailsView.class);
         intent.putExtra("content", content);
         view.startActivity(intent);
-
-//        String md = view.markDEditor.getMarkdownContent();
-//        String md2 = view.markDEditor.getMarkdownContent();
-//        List<String> imageList = view.markDEditor.getImageList();
-
-//        Log.d("MyTAG", md + " " + md2);
-//        for (String a: imageList) {
-//            Log.d("MyTAG", "zdj: " + a);
-//        }
-
     }
 
+    @Override
     public void showMoreOptions(View v) {
         PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -130,8 +99,6 @@ public class WriteNewPostPresenter implements EditorControlBar.EditorControlList
         popupMenu.show();
     }
 
-
-
     private void saveDraft(){
         FileOutputStream draft = null;
         try{
@@ -144,4 +111,27 @@ public class WriteNewPostPresenter implements EditorControlBar.EditorControlList
             e.printStackTrace();
         }
     }
+
+    public void setTextEditor() {
+//        view.markDEditor.configureEditor(
+//                getProfileDirectory(new Database().getUserID() + "/user_posts_photo/"),//server url for image upload
+//                "",              //serverToken
+//                true,           // isDraft: set true when you are loading draft
+//                "Type here...", //default hint of input box
+//                NORMAL
+//        );
+//
+//        view.markDEditor.loadDraft(new DraftModel(null));
+//        view.editorControlBar.setEditorControlListener(this);
+//        view.editorControlBar.setEditor(view.markDEditor);
+    }
+    //    @Override
+//    public void onInsertImageClicked() {
+//        openGallery();
+//    }
+//
+//    @Override
+//    public void onInserLinkClicked() {
+//        view.showToast("Link");
+//    }
 }

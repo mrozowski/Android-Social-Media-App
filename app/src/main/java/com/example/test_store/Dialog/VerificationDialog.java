@@ -20,6 +20,7 @@ public class VerificationDialog extends AppCompatDialogFragment {
     private EditText password;
     private VerificationDialogListener listener;
 
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -30,19 +31,8 @@ public class VerificationDialog extends AppCompatDialogFragment {
 
         builder.setView(view);
         builder.setTitle("Verification");
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                listener.onOkButtonListener(null);
-            }
-        });
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String userPassword = password.getText().toString().trim();
-                listener.onOkButtonListener(userPassword);
-            }
-        });
+        builder.setNegativeButton("Cancel", cancelButtonListener);
+        builder.setPositiveButton("OK", okButtonListener);
 
         password = view.findViewById(R.id.dialog_password_field);
 
@@ -59,4 +49,18 @@ public class VerificationDialog extends AppCompatDialogFragment {
             throw new ClassCastException(context.toString() + " must implement DialogListener");
         }
     }
+
+    private DialogInterface.OnClickListener cancelButtonListener =  new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            listener.onOkButtonListener(null);
+        }
+    };
+    private DialogInterface.OnClickListener okButtonListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            String userPassword = password.getText().toString().trim();
+            listener.onOkButtonListener(userPassword);
+        }
+    };
 }

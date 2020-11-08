@@ -29,7 +29,7 @@ import java.util.Locale;
 
 import static com.example.test_store.Constants.USER_DATA_FILE;
 
-public class AddPostDetailsPresenter implements AdapterView.OnItemSelectedListener {
+public class AddPostDetailsPresenter implements AdapterView.OnItemSelectedListener, AddPostDetailsContract.Presenter {
     private AddPostDetailsView view;
     public AddPostDetailsPresenter(AddPostDetailsView view) {
         this.view = view;
@@ -43,7 +43,6 @@ public class AddPostDetailsPresenter implements AdapterView.OnItemSelectedListen
 
         view.choose_cat.setOnItemSelectedListener(this);
         view.choose_cat.setSelection(0);
-        //view.choose_cat.setPopupBackgroundResource(R.drawable.main_motive);
     }
 
 
@@ -51,7 +50,6 @@ public class AddPostDetailsPresenter implements AdapterView.OnItemSelectedListen
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         ((TextView) parent.getChildAt(0)).setTextSize(22);
         ((TextView) view).setGravity(Gravity.CENTER);
-       // changeCategory(parent.getItemAtPosition(position).toString());
     }
 
 
@@ -60,6 +58,7 @@ public class AddPostDetailsPresenter implements AdapterView.OnItemSelectedListen
             view.showToast("Please select category");
     }
 
+    @Override
     public void submitPost() {
         Database database = new Database();
         if(validatePost()){
@@ -150,6 +149,7 @@ public class AddPostDetailsPresenter implements AdapterView.OnItemSelectedListen
         return id;
     }
 
+    @Override
     public void onBackClicked() {
         view.finish();
     }

@@ -1,28 +1,20 @@
 package com.example.test_store.Database;
 
-import android.content.Intent;
+
 import android.net.Uri;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.example.test_store.BottomNavigation;
 import com.example.test_store.Constants;
-import com.example.test_store.Logowanie.Login;
 import com.example.test_store.Post.PostModel;
 import com.example.test_store.NewPost.NewPostModel;
 import com.example.test_store.Profile.AppUser;
-import com.example.test_store.Register.Register;
 import com.example.test_store.Register.RegisterModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -34,21 +26,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
 
 import static com.example.test_store.Constants.PROFILE_IMG_NAME;
@@ -423,7 +406,6 @@ public class Database implements DTO{
     public void setListener(ResultDataListener listener){
         this.listener = listener;
     }
-
 
 }
 

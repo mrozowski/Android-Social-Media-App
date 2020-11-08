@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.test_store.R;
-public class AddPostDetailsView extends AppCompatActivity{
+public class AddPostDetailsView extends AppCompatActivity implements AddPostDetailsContract.View{
 
     protected String content;
     private AddPostDetailsPresenter presenter;
@@ -51,6 +51,7 @@ public class AddPostDetailsView extends AppCompatActivity{
         submit = findViewById(R.id.new_post_details_send);
     }
 
+    @Override
     public void showToast(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

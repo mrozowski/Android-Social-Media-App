@@ -16,11 +16,9 @@ import com.example.test_store.R;
 
 import static com.example.test_store.Constants.IMG_INTEND_REQUEST_CODE;
 
-public class WriteNewPostView extends AppCompatActivity {
+public class WriteNewPostView extends AppCompatActivity implements WriteNewPostContract.View{
 
-//    MarkDEditor markDEditor;
     EditText postContent;
-    //EditorControlBar editorControlBar;
     ImageView goBack, next, more;
 
     private WriteNewPostPresenter presenter;
@@ -32,16 +30,6 @@ public class WriteNewPostView extends AppCompatActivity {
         presenter = new WriteNewPostPresenter(this);
         setButtons();
         getExtras();
-//        markDEditor = findViewById(R.id.mdEditor);
-//        editorControlBar = findViewById(R.id.controlBar);
-//
-//
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
-//
-//
-//        presenter.setTextEditor();
-
     }
 
     private void getExtras() {
@@ -57,14 +45,12 @@ public class WriteNewPostView extends AppCompatActivity {
                 presenter.goBack();
             }
         });
-
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.goNext();
             }
         });
-
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +83,7 @@ public class WriteNewPostView extends AppCompatActivity {
         }
     }
 
-    protected void showToast(String message){
+    public void showToast(String message){
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 }

@@ -34,40 +34,13 @@ public class PostView extends Fragment implements PostContract.View {
     private AdView mAdView;
     private PostPresenter presenter;
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_post, container, false);
-
-        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
+        initAds(view);
         initComponents(view);
         presenter = new PostPresenter(this);
-
-        mAdView = view.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-
-        //WebView - check it later to add more custom look post like adding picture to post
-
-        likeButton.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-                presenter.giveLike();
-            }
-        });
-        authorPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.openAuthorProfile();
-            }
-        });
+        setActions();
         return view;
     }
 
@@ -94,8 +67,40 @@ public class PostView extends Fragment implements PostContract.View {
 
     }
 
+    private void setActions() {
+        likeButton.setOnClickListener(likeListener);
+        authorPhoto.setOnClickListener(photoListener);
+    }
+
+    private void initAds(View view) {
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
+
     @Override
     public void showToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
+
+    private View.OnClickListener likeListener = new View.OnClickListener() {
+        @RequiresApi(api = Build.VERSION_CODES.M)
+        @Override
+        public void onClick(View v) {
+            presenter.giveLike();
+        }
+    };
+    private View.OnClickListener photoListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            presenter.openAuthorProfile();
+        }
+    };
+
 }
