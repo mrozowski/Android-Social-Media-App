@@ -15,6 +15,8 @@ import com.example.test_store.R;
 
 import java.util.List;
 
+import static com.example.test_store.Helper.getDefaultDateFormat;
+
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
     private List<ItemDetails> mData;
@@ -40,7 +42,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String title = mData.get(position).getTitle();
-        String date = mData.get(position).getDate();
+        String date = getDefaultDateFormat(mData.get(position).getDate());
         int likes = mData.get(position).getLikes();
         int comments = mData.get(position).getComments();
         holder.post_title.setText(title);

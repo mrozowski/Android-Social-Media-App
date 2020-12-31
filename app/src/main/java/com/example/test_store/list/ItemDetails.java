@@ -2,9 +2,14 @@ package com.example.test_store.list;
 
 import android.widget.ImageView;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Objects;
+
 public class ItemDetails {
     private final String title;
-    private final String date;
+    private final Date date;
     private final String author;
     private final String category;
     private final int comments;
@@ -13,7 +18,7 @@ public class ItemDetails {
     private ImageView image;
 
 
-    public ItemDetails(String title, String author, String category, int comments, int likes, String date, String ID) {
+    public ItemDetails(String title, String author, String category, int comments, int likes, Date date, String ID) {
         this.title = title;
         this.author = author;
         this.category = category;
@@ -35,7 +40,7 @@ public class ItemDetails {
         return likes;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -53,5 +58,18 @@ public class ItemDetails {
 
     public void setImage(ImageView image) {
         this.image = image;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ItemDetails that = (ItemDetails) o;
+        return Objects.equals(date, that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(postID);
     }
 }

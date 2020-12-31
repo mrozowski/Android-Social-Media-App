@@ -35,7 +35,7 @@ import com.squareup.picasso.Picasso;
 import java.util.Objects;
 
 import static com.example.test_store.Constants.PROFILE_IMG_NAME;
-import static com.example.test_store.Constants.getProfileDirectory;
+import static com.example.test_store.Helper.getProfileDirectory;
 
 
 public class Database implements DTO{
@@ -88,7 +88,7 @@ public class Database implements DTO{
 
     @Override
     public void changeDescription(String newDescription) {
-        updateData("Description", newDescription);
+        updateData("description", newDescription);
     }
 
     @Override

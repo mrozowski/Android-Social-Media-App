@@ -33,4 +33,5 @@ public interface DTO {
    boolean isLoggedIn();
    void login(String email, String password);
    void register(RegisterModel newUser, String password);
+
 }

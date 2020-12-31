@@ -11,6 +11,7 @@ import androidx.core.text.HtmlCompat;
 import com.example.test_store.Constants;
 import com.example.test_store.Database.ResultDataListenerAdapter;
 import com.example.test_store.Database.Database;
+import com.example.test_store.Helper;
 import com.example.test_store.OtherUserProfile.OtherUserProfileView;
 import com.example.test_store.ProfileEdit.EditProfileView;
 import com.example.test_store.R;
@@ -56,7 +57,7 @@ public class PostPresenter extends ResultDataListenerAdapter implements PostCont
         view.author.setText((post.getAuthorNick()));
         view.authorPostCount.setText(String.valueOf(post.getAuthorPostCount()));
         view.postLikes.setText(String.valueOf(post.getLikes()));
-        view.postDate.setText(Constants.getDefaultDateFormat(post.getPostDate()));
+        view.postDate.setText(Helper.getDefaultDateFormat(post.getPostDate()));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)

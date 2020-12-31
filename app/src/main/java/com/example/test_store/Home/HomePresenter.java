@@ -1,5 +1,6 @@
 package com.example.test_store.Home;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,11 +11,14 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.work.Data;
 
 import com.example.test_store.Constants;
 import com.example.test_store.Database.Database;
 import com.example.test_store.Database.ResultDataListenerAdapter;
+import com.example.test_store.Helper;
 import com.example.test_store.Post.PostView;
 import com.example.test_store.list.ItemDetails;
 import com.example.test_store.list.MyRecyclerViewAdapter;
@@ -34,7 +38,11 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.example.test_store.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 import static com.example.test_store.Constants.TAG;
 
@@ -153,7 +161,25 @@ public class HomePresenter extends ResultDataListenerAdapter implements MyRecycl
         view.recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         view.recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(20));
 
-        adapter = new MyRecyclerViewAdapter(view.getContext(), postList);
+        ArrayList<ItemDetails> sortedList = Helper.sortListByDate(postList);
+
+        adapter = new MyRecyclerViewAdapter(view.getContext(), sortedList);
+        adapter.setClickListener(this);
+        view.recyclerView.setAdapter(adapter);
+        view.recyclerView.setNestedScrollingEnabled(false);
+    }
+
+
+    public void searchPosts(String search){
+        ArrayList<ItemDetails> filteredList = new ArrayList<>();
+        for(ItemDetails a: postList){
+            if(a.getTitle().toLowerCase().contains(search.toLowerCase())){
+                filteredList.add(a);
+            }
+        }
+
+
+        adapter = new MyRecyclerViewAdapter(view.getContext(), filteredList);
         adapter.setClickListener(this);
         view.recyclerView.setAdapter(adapter);
         view.recyclerView.setNestedScrollingEnabled(false);
@@ -187,7 +213,7 @@ public class HomePresenter extends ResultDataListenerAdapter implements MyRecycl
                         doc.getString("category"),
                         doc.getLong("commentsCount").intValue(),
                         doc.getLong("likes").intValue(),
-                        Constants.getDefaultDateFormat(doc.getDate("postDate")),
+                        doc.getDate("postDate"),
                         doc.getId()));
             }
 

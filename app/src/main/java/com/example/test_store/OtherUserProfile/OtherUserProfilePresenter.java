@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.test_store.Constants;
 import com.example.test_store.Database.Database;
 import com.example.test_store.Database.ResultDataListenerAdapter;
+import com.example.test_store.Helper;
 import com.example.test_store.Logowanie.Login;
 import com.example.test_store.Post.PostView;
 import com.example.test_store.Profile.AppUser;
@@ -73,7 +74,7 @@ public class OtherUserProfilePresenter extends ResultDataListenerAdapter impleme
         view.recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         view.recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(20));
 
-        view.adapter = new MyRecyclerViewAdapter(view.getContext(), postList);
+        view.adapter = new MyRecyclerViewAdapter(view.getContext(), Helper.sortListByDate(postList));
         view.adapter.setClickListener(view);
         view.recyclerView.setAdapter(view.adapter);
         view.recyclerView.setNestedScrollingEnabled(false);
@@ -125,7 +126,7 @@ public class OtherUserProfilePresenter extends ResultDataListenerAdapter impleme
                         doc.getString("category"),
                         doc.getLong("commentsCount").intValue(),
                         doc.getLong("likes").intValue(),
-                        Constants.getDefaultDateFormat(doc.getDate("postDate")),
+                        doc.getDate("postDate"),
                         doc.getId()));
             }
             showPostList();

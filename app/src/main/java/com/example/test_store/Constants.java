@@ -1,7 +1,12 @@
 package com.example.test_store;
 
+import com.example.test_store.list.ItemDetails;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 
@@ -16,13 +21,4 @@ public class Constants {
     public final static String NICK_REGEX = "^[a-zA-Z]\\w*$";
     public final static int IMG_INTEND_REQUEST_CODE = 1002;
 
-    public static String getProfileDirectory(String userID){
-        //return directory of profile picture in the firebase cloud
-        return "users/"+userID+"/";
-    }
-
-    public static String getDefaultDateFormat(Date date){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd", Locale.ENGLISH);
-        return dateFormat.format(date);
-    }
 }

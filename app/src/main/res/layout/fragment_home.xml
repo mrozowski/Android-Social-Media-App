@@ -27,15 +27,32 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/ic_feathorpostname"/>
 
-            <EditText
-                android:id="@+id/home_search_bar"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginBottom="18dp"
-                android:hint="@string/search"
-                android:paddingHorizontal="8dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:background="@drawable/text_input_bg" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/home_search_bar"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="18dp"
+                    android:background="@drawable/text_input_bg"
+                    android:hint="@string/search"
+                    android:paddingHorizontal="8dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <Button
+                    android:id="@+id/button_search_list"
+                    android:layout_width="100dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/colorPrimaryBlue"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="@string/search" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
