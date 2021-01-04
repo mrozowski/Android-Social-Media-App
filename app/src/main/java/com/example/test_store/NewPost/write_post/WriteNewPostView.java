@@ -20,8 +20,8 @@ public class WriteNewPostView extends AppCompatActivity implements WriteNewPostC
 
     EditText postContent;
     ImageView goBack, next, more;
-
     private WriteNewPostPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -58,4 +58,5 @@
     <string name="advertiser_name">Advertiser name</string>
     <string name="ad_body">Ad body</string>
     <string name="learn_more">Learn more</string>
+    <string name="you_didn_t_publish_any_articles_yet">You didn\'t publish any articles yet</string>
 </resources>

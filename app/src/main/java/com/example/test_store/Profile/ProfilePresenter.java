@@ -66,13 +66,20 @@ public class ProfilePresenter extends ResultDataListenerAdapter implements Profi
     }
 
     private void showPostList(){
-        view.recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        view.recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(20));
+        if(postList.size() == 0){
+            view.empty.setVisibility(View.VISIBLE);
+        }
+        else{
+            view.empty.setVisibility(View.INVISIBLE);
+            view.recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+            view.recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(20));
 
-        view.adapter = new MyRecyclerViewAdapter(view.getContext(), Helper.sortListByDate(postList));
-        view.adapter.setClickListener(view);
-        view.recyclerView.setAdapter(view.adapter);
-        view.recyclerView.setNestedScrollingEnabled(false);
+            view.adapter = new MyRecyclerViewAdapter(view.getContext(), Helper.sortListByDate(postList));
+            view.adapter.setClickListener(view);
+            view.recyclerView.setAdapter(view.adapter);
+            view.recyclerView.setNestedScrollingEnabled(false);
+        }
+
     }
 
     private void loadUserData() {

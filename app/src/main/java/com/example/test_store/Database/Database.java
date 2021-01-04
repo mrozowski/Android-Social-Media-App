@@ -347,9 +347,7 @@ public class Database implements DTO{
         storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-
                 Picasso.get().load(uri).into(profile);
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -397,7 +395,6 @@ public class Database implements DTO{
             }
         });
     }
-
 
     public String getUserID(){
         return user.getUid();

@@ -22,7 +22,7 @@ import com.example.test_store.list.MyRecyclerViewAdapter;
 
 public class Profile extends Fragment implements MyRecyclerViewAdapter.ItemClickListener, ProfileContract.View {
 
-    TextView nick, likes, followers, posts, description;
+    TextView nick, likes, followers, posts, description, empty;
     ImageButton settings;
     ImageView profileImage;
     MyRecyclerViewAdapter adapter;
@@ -53,6 +53,7 @@ public class Profile extends Fragment implements MyRecyclerViewAdapter.ItemClick
         posts = view.findViewById(R.id.posts_count);
         followers = view.findViewById(R.id.followers);
         description = view.findViewById(R.id.user_description);
+        empty = view.findViewById(R.id.empty_post_list);
         settings = view.findViewById(R.id.settings_button);
         profileImage = view.findViewById(R.id.user_avatar);
         recyclerView = view.findViewById(R.id.recyclerView);
