@@ -18,9 +18,9 @@
     <string name="enter_your_password">Enter your password</string>
     <string name="date">Date:</string>
     <string name="title">Title</string>
-    <string name="post_template_content"> <![CDATA[Aliquam vel est accumsan, luctus mauris vitae, consequat libero. Cras bibendum risus eget velit consectetur, vel fermentum dui sollicitudin. Ut lobortis ipsum felis, ac elementum leo interdum sit amet. Vivamus tempus tincidunt mauris, non laoreet velit vulputate vel. <h3>Morbi euismod odio vitae egestas semper.</h3> Phasellus in facilisis est. <br><br> <b>Suspendisse luctus </b>augue ac sem varius feugiat. Sed euismod nibh massa. Cras tempor volutpat massa, ut eleifend est tempor sed. Proin vulputate ipsum id tellus semper scelerisque. Fusce feugiat bibendum interdum. Nunc laoreet enim vitae urna viverra, a egestas leo laoreet. ]]></string>
-    <string name="zero">0</string>
-    <string name="t">T</string>
+    <string name="post_template_content" translatable="false"> <![CDATA[Aliquam vel est accumsan, luctus mauris vitae, consequat libero. Cras bibendum risus eget velit consectetur, vel fermentum dui sollicitudin. Ut lobortis ipsum felis, ac elementum leo interdum sit amet. Vivamus tempus tincidunt mauris, non laoreet velit vulputate vel. <h3>Morbi euismod odio vitae egestas semper.</h3> Phasellus in facilisis est. <br><br> <b>Suspendisse luctus </b>augue ac sem varius feugiat. Sed euismod nibh massa. Cras tempor volutpat massa, ut eleifend est tempor sed. Proin vulputate ipsum id tellus semper scelerisque. Fusce feugiat bibendum interdum. Nunc laoreet enim vitae urna viverra, a egestas leo laoreet. ]]></string>
+    <string name="zero" translatable="false">0</string>
+    <string name="t" translatable="false">T</string>
     <string name="post_title">Post Title</string>
     <string name="choose_the_category">Choose the category</string>
     <string name="category">Category</string>
@@ -49,14 +49,14 @@
     <string name="search">Search</string>
     <string name="motivation_sentence">Show the world your ideas</string>
     <string name="type_new_post">Type a post here…</string>
-    <string name="login">Login</string>
+    <string name="login" translatable="false">Login</string>
     <string name="create_a_new_account">Create a new account</string>
     <string name="i_have_an_account">I have an account</string>
     <string name="register">Register</string>
-    <string name="ad">Ad</string>
-    <string name="add_heading">Add heading</string>
-    <string name="advertiser_name">Advertiser name</string>
-    <string name="ad_body">Ad body</string>
-    <string name="learn_more">Learn more</string>
+    <string name="ad" translatable="false">Ad</string>
+    <string name="add_heading" translatable="false">Add heading</string>
+    <string name="advertiser_name" translatable="false">Advertiser name</string>
+    <string name="ad_body" translatable="false">Ad body</string>
+    <string name="learn_more" translatable="false">Learn more</string>
     <string name="you_didn_t_publish_any_articles_yet">You didn\'t publish any articles yet</string>
 </resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FeatherPost</string>
+    <string name="phone">Telefon</string>
+    <string name="posts">Posty</string>
+    <string name="settings">Ustawienia</string>
+    <string name="logout">Wyloguj</string>
+    <string name="user_name">Nick</string>
+    <string name="description">Opis</string>
+    <string name="comments">Komentarze</string>
+    <string name="likes">Polubienia</string>
+    <string name="edit_profile">Edytuj profil</string>
+    <string name="password">Hasło</string>
+    <string name="save">Zapisz</string>
+    <string name="back">Wstecz</string>
+    <string name="enter_your_password">Podaj hasło</string>
+    <string name="date">Data:</string>
+    <string name="title">Tytuł</string>
+    <string name="post_title">Tytuł postu</string>
+    <string name="choose_the_category">Wybierz kategorie</string>
+    <string name="category">Kategoria</string>
+    <string name="tags">Tagi</string>
+    <string name="send">Wyślij</string>
+    <string name="save_draft">Zapisz szkic</string>
+    <string name="clear">Wyczyść</string>
+    <string name="author">Autor:</string>
+    <string name="home">Dom</string>
+    <string name="add">Dodaj post</string>
+    <string name="profile">Profil</string>
+    <string name="new_empty_post">Nowy pusty post</string>
+    <string name="template_1">Szablon 1</string>
+    <string name="template_2">Szablon 2</string>
+    <string name="saved">Zapisane</string>
+    <string name="saved_1">Zapisane 1</string>
+    <string name="search">Szukaj</string>
+    <string name="motivation_sentence">Pokaż światu swoje pomysły</string>
+    <string name="type_new_post">Zacznij post tutaj...</string>
+    <string name="create_a_new_account">Stwórz nowe konto</string>
+    <string name="i_have_an_account">Mam już konto</string>
+    <string name="register">Zarejestruj</string>
+    <string name="you_didn_t_publish_any_articles_yet">Nie masz jeszcze żadnych artykułów</string>
+
+</resources>
