@@ -1,2 +1,2 @@
 # Android-Social-Media-App
-It started as a class project but I wanted to create something bigger this time
+It's a project for college class. Social app for posting short articles, news, stories etc
