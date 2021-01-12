@@ -1,42 +1,26 @@
 package com.example.test_store.OtherUserProfile;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.test_store.Constants;
 import com.example.test_store.Database.Database;
 import com.example.test_store.Database.ResultDataListenerAdapter;
 import com.example.test_store.Helper;
-import com.example.test_store.Logowanie.Login;
 import com.example.test_store.Post.PostView;
 import com.example.test_store.Profile.AppUser;
-import com.example.test_store.Profile.Profile;
-import com.example.test_store.ProfileEdit.EditProfileView;
-import com.example.test_store.R;
 import com.example.test_store.list.ItemDetails;
 import com.example.test_store.list.MyRecyclerViewAdapter;
 import com.example.test_store.list.VerticalSpaceItemDecoration;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import static android.content.Context.MODE_PRIVATE;
 import static com.example.test_store.Constants.TAG;
-import static com.example.test_store.Constants.USER_DATA_FILE;
 
 public class OtherUserProfilePresenter extends ResultDataListenerAdapter implements OtherUserProfileContract.Presenter {
     private OtherUserProfileView view;

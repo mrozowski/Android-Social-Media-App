@@ -39,5 +39,24 @@
     <string name="i_have_an_account">Mam już konto</string>
     <string name="register">Zarejestruj</string>
     <string name="you_didn_t_publish_any_articles_yet">Nie masz jeszcze żadnych artykułów</string>
-
+    <string name="i_don_t_have_an_account">Nie mam konta</string>
+    <string name="phone_number">Numer telefonu</string>
+    <string name="nick_is_empty">Nick jest pusty</string>
+    <string name="draft_saved">Zapisano</string>
+    <string name="short_nick">Nick jest za krótki</string>
+    <string name="long_nick">Nick jest za długi</string>
+    <string name="incorrect_nick">Nick jest nie poprawny</string>
+    <string name="empty_email">Należy podać email</string>
+    <string name="incorrect_email">Nie poprawny email</string>
+    <string name="empty_password">Należy podać hasło</string>
+    <string name="short_password">Hasło jest za krótkie</string>
+    <string name="incorrect_password">Hasło jest nie poprawne</string>
+    <string name="empty_phone">Należy podać numer telefonu</string>
+    <string name="incorrect_phone">Numer telefonu jest nie poprawny</string>
+    <string name="short_content">Post jest za krótki</string>
+    <string name="empty_content">Post nie może być pusty</string>
+    <string name="short_title">Tytuł jest za krótki</string>
+    <string name="long_title">Tytuł jest za długi</string>
+    <string name="empty_title">Tytuł nie może być pusty</string>
+    <string name="succesful_login">Udane logowanie</string>
 </resources>

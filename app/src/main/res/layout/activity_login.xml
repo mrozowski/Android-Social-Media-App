@@ -79,7 +79,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-light"
-        android:text="I don't have an account"
+        android:text="@string/i_don_t_have_an_account"
         android:textSize="21sp"
         android:onClick="onRegisterClick"
         app:layout_constraintBottom_toBottomOf="parent"

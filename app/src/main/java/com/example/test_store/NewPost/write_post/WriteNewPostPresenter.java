@@ -105,10 +105,10 @@ public class WriteNewPostPresenter implements WriteNewPostContract.Presenter{
             draft = view.openFileOutput("post.txt", MODE_PRIVATE);
             draft.write(view.postContent.getText().toString().getBytes());
             draft.close();
-            view.showToast("Draft saved");
+            view.showToast(view.getString(R.string.draft_saved));
         } catch (IOException e){
             Log.d("MyTAG", "error: " + e.getMessage());
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 

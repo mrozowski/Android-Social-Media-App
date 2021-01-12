@@ -12,16 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewPost.add_details.AddPostDetailsView" />
-        <activity android:name=".NewPost.write_post.WriteNewPostView" />
-        <activity android:name=".Logowanie.Login">
+        <activity android:name=".Logowanie.Login"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".NewPost.add_details.AddPostDetailsView" />
         <activity android:name=".Register.Register" />
+        <activity android:name=".NewPost.write_post.WriteNewPostView" />
         <activity android:name=".BottomNavigation"
             android:windowSoftInputMode="adjustPan"/>
         <!--<activity android:name=".Profile.Profile" /> -->

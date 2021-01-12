@@ -90,12 +90,12 @@ public class AddPostDetailsPresenter implements AdapterView.OnItemSelectedListen
         String content = view.content;
         if(!content.equals("")){
             if(content.length() < 10) {
-                view.showToast("Content is too small");
+                view.showToast(view.getString(R.string.short_content));
                 return false;
             }
         }
         else {
-            view.showToast("Content cannot be empty!");
+            view.showToast(view.getString(R.string.empty_content));
             return false;
         }
         return true;
@@ -105,16 +105,16 @@ public class AddPostDetailsPresenter implements AdapterView.OnItemSelectedListen
         String title = view.title.getText().toString();
         if(!title.equals("")) {
             if (title.length() < 3){
-                view.title.setError("Title is too short");
+                view.title.setError(view.getString(R.string.short_title));
                 return false;
             }
             else if (title.length() > 30) {
-                view.title.setError("Title is too long");
+                view.title.setError(view.getString(R.string.long_title));
                 return false;
             }
         }
         else{
-            view.title.setError("Title cannot be empty");
+            view.title.setError(view.getString(R.string.empty_title));
             return false;
         }
         return true;
