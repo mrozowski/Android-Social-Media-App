@@ -47,6 +47,7 @@ public class EditProfilePresenter extends ResultDataListenerAdapter implements E
         this.view = view;
         database = db;
         database.setListener(this);
+
         database.getCurrentUserProfilePicture(view.profileImage);
         //loadProfilePictureFromStorage();
     }
